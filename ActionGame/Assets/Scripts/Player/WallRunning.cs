@@ -63,12 +63,12 @@ public class WallRunning : MonoBehaviour
 
             if (isRight)
             {
-                cam.localEulerAngles = new Vector3(0f, 0f, 10f);
+                //cam.localEulerAngles = new Vector3(0f, 0f, 10f);
             }
 
             if (isLeft)
             {
-                cam.localEulerAngles = new Vector3(0f, 0f, -10f);
+                //cam.localEulerAngles = new Vector3(0f, 0f, -10f);
             }
         }
     }
