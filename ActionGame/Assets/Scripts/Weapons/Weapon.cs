@@ -6,23 +6,24 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    public int totalAmmo = 120;
-    public float fireRate = 15f;
-    public float damage = 25f;
-    public float distance = 100f;
-    public float force = 100f;
-    public Transform gunEnd;
-    public ParticleSystem muzzle;
+    public string Name;
+    public int TotalAmmo = 120;
+    public float FireRate = 15f;
+    public float Damage = 25f;
+    public float Distance = 100f;
+    public float Force = 100f;
+    public Transform GunEnd;
+    public ParticleSystem Muzzle;
     private Camera cam;
-    public bool isShooting;
+    public bool IsShooting;
 
     private WaitForSeconds laserDuration = new WaitForSeconds(.07f);
     private LineRenderer laserLine;
-    public AudioClip shotSound;
-    public AudioClip emptySound;
+    public AudioClip ShotSound;
+    public AudioClip EmptySound;
     private float nextFire = 0f;
 
-    public Text totalAmmoText;
+    public Text TotalAmmoText;
     private RaycastHit hit;
 
     private void Start()
@@ -33,22 +34,22 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        totalAmmoText.text = totalAmmo.ToString();
+        TotalAmmoText.text = TotalAmmo.ToString();
 
-        if (Input.GetButton("Fire1") && Time.time >= nextFire && totalAmmo > 0)
+        if (Input.GetButton("Fire1") && Time.time >= nextFire && TotalAmmo > 0)
         {
-            nextFire = Time.time + 1f / fireRate;
-            isShooting = true;
+            nextFire = Time.time + 1f / FireRate;
+            IsShooting = true;
             Shoot();
         }
-        else if (Input.GetButtonDown("Fire1") && totalAmmo == 0)
+        else if (Input.GetButtonDown("Fire1") && TotalAmmo == 0)
         {
-            AudioSource.PlayClipAtPoint(emptySound, this.transform.position);
-            isShooting = false;
+            AudioSource.PlayClipAtPoint(EmptySound, this.transform.position);
+            IsShooting = false;
         }
         else
         {
-            isShooting = false;
+            IsShooting = false;
         }
     }
 
@@ -59,19 +60,19 @@ public class Weapon : MonoBehaviour
 
     private void DrawLaser()
     {
-        if (!isShooting) return;
+        if (!IsShooting) return;
      
-        laserLine.SetPosition(0, gunEnd.position);
+        laserLine.SetPosition(0, GunEnd.position);
     }
 
     private void Shoot()
     {
-        totalAmmo -= 1;
-        muzzle.Play();
-        AudioSource.PlayClipAtPoint(shotSound, this.transform.position);
+        TotalAmmo -= 1;
+        Muzzle.Play();
+        AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
         StartCoroutine(ShotEffect());
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             laserLine.SetPosition(1, hit.point);
             Debug.Log(hit.collider.gameObject.name);

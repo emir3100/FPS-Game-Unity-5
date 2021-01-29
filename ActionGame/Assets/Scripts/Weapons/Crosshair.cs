@@ -8,11 +8,11 @@ public class Crosshair : MonoBehaviour
     private RectTransform crosshairTransform;
 
     [Range (10f,60f)]
-    public float size = 10f;
+    public float Size = 10f;
     [Range(5f, 25f)]
-    public float lenght = 5f;
+    public float Lenght = 5f;
     [Range(1f, 10f)]
-    public float width = 2f;
+    public float Width = 2f;
 
     private RectTransform top, bottom, left, right;
 
@@ -28,10 +28,10 @@ public class Crosshair : MonoBehaviour
 
     void Update()
     {
-        crosshairTransform.sizeDelta = new Vector2(size, size);
-        top.sizeDelta = new Vector2(width, lenght);
-        bottom.sizeDelta = new Vector2(width, lenght);
-        left.sizeDelta = new Vector2(lenght, width);
-        right.sizeDelta = new Vector2(lenght, width);
+        crosshairTransform.sizeDelta = new Vector2(Size, Size);
+        top.sizeDelta = new Vector2(Width, Lenght);
+        bottom.sizeDelta = new Vector2(Width, Lenght);
+        left.sizeDelta = new Vector2(Lenght, Width);
+        right.sizeDelta = new Vector2(Lenght, Width);
     }
 }

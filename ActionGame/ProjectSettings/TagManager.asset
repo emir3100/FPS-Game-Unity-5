@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RunnableWall
   - FlyRamp
+  - PickableWeapon
   layers:
   - Default
   - TransparentFX
