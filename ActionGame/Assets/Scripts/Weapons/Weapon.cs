@@ -25,11 +25,18 @@ public class Weapon : MonoBehaviour
 
     public Text TotalAmmoText;
     private RaycastHit hit;
+    private WeaponAnimation WeaponAnimationScript;
+    public PlayerMovement PlayerMovementScript;
+
+    [Header("Weapon Animator")]
+    public string ShootParam;
+    public string MovingParam;
 
     private void Start()
     {
         cam = GetComponentInParent<Camera>();
         laserLine = GetComponent<LineRenderer>();
+        WeaponAnimationScript = this.GetComponent<WeaponAnimation>();
     }
 
     private void Update()
@@ -71,7 +78,7 @@ public class Weapon : MonoBehaviour
         Muzzle.Play();
         AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
         StartCoroutine(ShotEffect());
-
+        WeaponAnimationScript.ShootAnimation(ShootParam);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             laserLine.SetPosition(1, hit.point);

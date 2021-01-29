@@ -64,7 +64,13 @@ public class PlayerMovement : MonoBehaviour {
         MyInput();
         Look();
     }
-
+    public bool IsMoving()
+    {
+        if (x != 0 || y != 0)
+            return true;
+        else
+            return false;
+    }
     private void MyInput() {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
@@ -86,7 +92,6 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
     }
-
     private void StopCrouch() {
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
