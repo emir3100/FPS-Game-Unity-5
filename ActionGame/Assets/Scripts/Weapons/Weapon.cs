@@ -26,7 +26,6 @@ public class Weapon : MonoBehaviour
     public Text TotalAmmoText;
     private RaycastHit hit;
     private WeaponAnimation WeaponAnimationScript;
-    public PlayerMovement PlayerMovementScript;
 
     [Header("Weapon Animator")]
     public string ShootParam;
