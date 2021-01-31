@@ -23,7 +23,7 @@ public class LaserGun : Weapon
     {
         TotalAmmoText.text = TotalAmmo.ToString();
 
-        if (Input.GetButton("Fire1") && Time.time >= base.nextFire && TotalAmmo > 0)
+        if (Input.GetButton("Fire1") && Time.time >= nextFire && TotalAmmo > 0)
         {
             nextFire = Time.time + 1f / FireRate;
             IsShooting = true;
