@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7931867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 493995051}
   - component: {fileID: 493995050}
   m_Layer: 5
-  m_Name: Pistol
+  m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,15 +604,15 @@ RectTransform:
   m_GameObject: {fileID: 493995048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 796619243}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -60.230003, y: 29.600006}
-  m_SizeDelta: {x: 40, y: 30}
+  m_AnchoredPosition: {x: -110.44, y: 35.4}
+  m_SizeDelta: {x: 56.8, y: 27.1}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &493995050
 MonoBehaviour:
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: db44402ed2af1e342868cdaf5a7d3363, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22d618bad3cb91642b18a0d5a9e7cf67, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1281,7 +1281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &796619243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4043,7 +4043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5419405888419080827, guid: 6aa2351e7948a3d4cacf159e63a6b252, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7452176659440996230, guid: 6aa2351e7948a3d4cacf159e63a6b252, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4070,6 +4070,10 @@ PrefabInstance:
     - target: {fileID: 6115924723166091197, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
       propertyPath: m_Name
       value: FPS_Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115924723166091197, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6115924723166091202, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
       propertyPath: cam
