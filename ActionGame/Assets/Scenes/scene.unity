@@ -1286,7 +1286,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11635,6 +11635,10 @@ PrefabInstance:
       propertyPath: WeaponAnimationScript
       value: 
       objectReference: {fileID: 1119792328}
+    - target: {fileID: 1792115204993492753, guid: a8a3d8cf623569f498842526ba8ef9f5, type: 3}
+      propertyPath: FireRate
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1792115204993492846, guid: a8a3d8cf623569f498842526ba8ef9f5, type: 3}
       propertyPath: m_Name
       value: FPS_Smg
@@ -11672,6 +11676,14 @@ PrefabInstance:
       propertyPath: WeaponAnimationScript
       value: 
       objectReference: {fileID: 1119792328}
+    - target: {fileID: 6115924723166091202, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
+      propertyPath: FireRate
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115924723166091202, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
+      propertyPath: Distance
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 6350437145507713452, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
       propertyPath: PlayerMovementScript
       value: 
