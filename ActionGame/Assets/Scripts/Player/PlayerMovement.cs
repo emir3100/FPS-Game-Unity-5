@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Assingables")]
     public Transform playerCam;
     public Transform orientation;
+    public Transform Legs;
+    public MoveLegs MoveLegsScript;
 
     private Rigidbody rb;
 
@@ -84,7 +86,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void StartCrouch() {
+        MoveLegsScript.LegsY = 0.50f;
         transform.localScale = crouchScale;
+        Legs.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.velocity.magnitude > 0.5f) {
             if (grounded) {
@@ -93,7 +97,9 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     private void StopCrouch() {
+        MoveLegsScript.LegsY = 1.51f;
         transform.localScale = playerScale;
+        Legs.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
