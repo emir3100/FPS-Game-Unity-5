@@ -7,7 +7,6 @@ public class RocketLauncher : Weapon
     //[Header("SubClass Variables")]
     public Rigidbody MissilePrefab;
     public int TotalAmmo = 120;
-    public float Damage = 25f;
     public AudioClip EmptySound;
     public Transform Player;
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4010640563946213785}
   - component: {fileID: 407143598049152180}
   - component: {fileID: 2688631858297496906}
+  - component: {fileID: 5100577209466096522}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -211,3 +212,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5100577209466096522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199484629558961104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88420c200db3fe74e867cdeff95aaef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionPrefabs:
+  - {fileID: 100012, guid: 0ab337ed5ce12654b8fe600ce0020dce, type: 3}
+  - {fileID: 100020, guid: bc1c4ec341372414a9117a472cb6766d, type: 3}
+  isToucing: 0
+  ExplosionSound: {fileID: 8300000, guid: 5a0ed2e5d9a85af41bf33a63363a84db, type: 3}
+  radius: 15
+  explosionForce: 7000
+  Damage: 100

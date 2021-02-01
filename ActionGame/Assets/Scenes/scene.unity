@@ -589,7 +589,7 @@ MonoBehaviour:
   Muzzle: {fileID: 615888031}
   cam: {fileID: 1307385662}
   IsShooting: 0
-  ShotSound: {fileID: 8300000, guid: 77d550f78ba742945800cba0b340c69b, type: 3}
+  ShotSound: {fileID: 8300000, guid: 5a4eddf2a21e0fa4b8a64b3211bb512a, type: 3}
   nextFire: 0
   TotalAmmoText: {fileID: 1378953550}
   WeaponAnimationScript: {fileID: 322375914}
@@ -597,7 +597,6 @@ MonoBehaviour:
   MovingParam: isMoving
   MissilePrefab: {fileID: 407143598049152180, guid: f12dd0d482a56ba4a88046dbe36ac83a, type: 3}
   TotalAmmo: 120
-  Damage: 100
   EmptySound: {fileID: 8300000, guid: 55b22a3e2b5111242948cb379bf83774, type: 3}
   Player: {fileID: 1113613885}
 --- !u!114 &322375914
@@ -7726,7 +7725,7 @@ GameObject:
   - component: {fileID: 1113613892}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
