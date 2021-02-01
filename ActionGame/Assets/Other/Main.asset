@@ -251,7 +251,7 @@ MonoBehaviour:
     value: 25
   tint:
     overrideState: 1
-    value: 0
+    value: 10
   colorFilter:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
