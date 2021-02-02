@@ -6,14 +6,18 @@ public class LegsAnimation : MonoBehaviour
 {
     public bool IsMoving;
     public bool IsIdle;
-    public float MovingSpeed = 1f;
-    public Animator LegsAnimator;
+    public float Velocity = 0.1f;
+    private Animator LegsAnimator;
     public string MovingName;
     public string IdleName;
     public string MovingSpeedName;
-
+    int VelocityHash;
     public PlayerMovement playerScript;
-
+    private void Start()
+    {
+        LegsAnimator = GetComponent<Animator>();
+        VelocityHash = Animator.StringToHash("Velocity");
+    }
     void Update()
     {
         if (playerScript.IsMoving())
@@ -37,15 +41,16 @@ public class LegsAnimation : MonoBehaviour
             SetBoolAnimator(MovingName, false);
             SetBoolAnimator(IdleName, true);
         }
+
+        LegsAnimator.SetFloat(VelocityHash, Velocity);
+        Velocity = playerScript.rb.velocity.magnitude/100f;
+
+        if (Velocity > 1f)
+            Velocity = 1f;
     }
 
     private void SetBoolAnimator(string param, bool boolean)
     {
         LegsAnimator.SetBool(param, boolean);
-    }
-
-    private void MovingSpeedAnimator(string param)
-    {
-        LegsAnimator.SetFloat(param, MovingSpeed);
     }
 }

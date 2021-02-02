@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     public Transform Legs;
     public MoveLegs MoveLegsScript;
 
-    private Rigidbody rb;
+    [HideInInspector]
+    public Rigidbody rb;
 
     private float xRotation;
     private float sensitivity = 50f;

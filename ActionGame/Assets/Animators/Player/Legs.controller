@@ -132,11 +132,11 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 1a3ff84fc2ba539479f011710904ad54, type: 2}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 5
+    m_TimeScale: 3
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: MovingSpeed
+  m_BlendParameter: Velocity
   m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -180,7 +180,7 @@ AnimatorController:
   m_Name: Legs
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: MovingSpeed
+  - m_Name: Velocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
