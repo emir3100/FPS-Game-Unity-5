@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 20;
     public bool grounded;
     public LayerMask whatIsGround;
+    public float PlayerVelocity;
+    public ParticleSystem SpeedEffect;
 
     public float counterMovement = 0.175f;
     private float threshold = 0.01f;
@@ -68,6 +70,27 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         MyInput();
         Look();
+        PlayerVelocity = rb.velocity.magnitude;
+
+        if (PlayerVelocity > 35)
+        {
+            SpeedEffect.Play();
+            SpeedEffect.gameObject.SetActive(true);
+        }
+        else
+        {
+            SpeedEffect.gameObject.SetActive(false);
+            SpeedEffect.Stop();
+        }
+        var main = SpeedEffect.main;
+        main.simulationSpeed = PlayerVelocity / 30f;
+
+        if (main.simulationSpeed < 0 || PlayerVelocity < 0 || PlayerVelocity == 4.768372e-06)
+        {
+            SpeedEffect.gameObject.SetActive(false);
+            SpeedEffect.Stop();
+        }
+            
     }
     public bool IsMoving()
     {
