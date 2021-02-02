@@ -39,6 +39,12 @@ public class LaserGun : Weapon
             IsShooting = false;
         }
     }
+
+    private void LateUpdate()
+    {
+        DrawLaser();
+    }
+
     public override void Shoot()
     {
         TotalAmmo -= 1;
@@ -46,6 +52,7 @@ public class LaserGun : Weapon
         AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
         StartCoroutine(ShotEffect());
         base.WeaponAnimationScript.ShootAnimation(ShootParam);
+
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             laserLine.SetPosition(1, hit.point);
@@ -53,14 +60,12 @@ public class LaserGun : Weapon
         }
         else
         {
-            laserLine.SetPosition(1, cam.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)));
+            Vector3 endPoint = cam.transform.position + (cam.transform.forward.normalized * Distance);
+            laserLine.SetPosition(1, endPoint);
         }
     }
 
-    private void LateUpdate()
-    {
-        DrawLaser();
-    }
+    
 
     private void DrawLaser()
     {
