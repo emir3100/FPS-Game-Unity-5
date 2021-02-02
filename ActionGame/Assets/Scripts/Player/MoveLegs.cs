@@ -10,7 +10,7 @@ public class MoveLegs : MonoBehaviour
     private RaycastHit hit;
     public float Distance;
     [HideInInspector]
-    public float LegsY = 1.51f;
+    public float LegsY = 1.5f;
     private void Update()
     {
         Vector3 CameraAngle = new Vector3(0, Camera.eulerAngles.y, 0);

@@ -31,11 +31,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 playerScale;
+    private Vector3 legsScale;
 
     [Header("Jumping")]
     public float jumpForce = 550f;
 
-    private bool readyToJump = true;
+    public bool readyToJump = true;
     private float jumpCooldown = 0.25f;
 
     float x, y;
@@ -52,7 +53,8 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     void Start() {
-        playerScale =  transform.localScale;
+        playerScale = transform.localScale;
+        legsScale = Legs.transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -99,7 +101,7 @@ public class PlayerMovement : MonoBehaviour {
     private void StopCrouch() {
         MoveLegsScript.LegsY = 1.51f;
         transform.localScale = playerScale;
-        Legs.localScale = playerScale;
+        Legs.localScale = legsScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
