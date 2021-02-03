@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public Transform orientation;
     public Transform Legs;
     public MoveLegs MoveLegsScript;
+    private CameraFOV CameraFov;
 
     [HideInInspector]
     public Rigidbody rb;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     void Start() {
+        CameraFov = Camera.main.GetComponent<CameraFOV>();
         playerScale = transform.localScale;
         legsScale = Legs.transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
@@ -77,12 +79,14 @@ public class PlayerMovement : MonoBehaviour {
             SpeedEffect.Play();
             SpeedEffect.gameObject.SetActive(true);
             FindObjectOfType<AudioManager>().Play("Speed");
+            CameraFov.SetCameraFov(60f + (PlayerVelocity*0.3f));
         }
         else
         {
             SpeedEffect.gameObject.SetActive(false);
             SpeedEffect.Stop();
             FindObjectOfType<AudioManager>().Stop("Speed");
+            CameraFov.SetCameraFov(60f);
         }
         var main = SpeedEffect.main;
         main.simulationSpeed = PlayerVelocity / 30f;
@@ -91,6 +95,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             SpeedEffect.gameObject.SetActive(false);
             SpeedEffect.Stop();
+            CameraFov.SetCameraFov(60f);
         }
     }
 
