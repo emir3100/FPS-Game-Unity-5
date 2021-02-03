@@ -10,9 +10,4 @@ public class Footsteps : MonoBehaviour
         int i = Random.Range(0, 2);
         FindObjectOfType<AudioManager>().Play($"Footsteps{i}");
     }
-
-    public void Jump()
-    {
-        FindObjectOfType<AudioManager>().Play("Jump");
-    }
 }
