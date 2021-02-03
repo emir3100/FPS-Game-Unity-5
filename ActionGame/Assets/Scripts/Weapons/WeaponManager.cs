@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class WeaponManager : MonoBehaviour
 {
     public int SelectedWeapon = 0;
-    public Transform CurrentWeapon;
     public Transform GunHolder;
     public Transform UIWeapons;
 
@@ -44,10 +43,7 @@ public class WeaponManager : MonoBehaviour
         foreach (Transform weapon in GunHolder.transform)
         {
             if (i == SelectedWeapon)
-            {
                 weapon.gameObject.SetActive(true);
-                CurrentWeapon = weapon;
-            }
             else
                 weapon.gameObject.SetActive(false);
             i++;
