@@ -6,102 +6,83 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [HideInInspector]
+    public WeaponHolder CurrentWeapon;
 
-    public Transform AllWeapons;
-    private Transform weaponHolder;
-    public List<Transform> AllWeaponsList;
-    public List<Transform> WeaponEquippedList;
+    public List<WeaponHolder> AllWeapons;
+    public List<WeaponHolder> AllWeaponsInInventory;
+
     public Camera cam;
-    public WeaponManager WeaponManagerScript;
+
     public float pickupDistance;
     public float dropForwardForce, dropUpwardForce;
     public int MaxWeapons = 3;
     RaycastHit hit;
 
-    public GameObject LaserPistolPrefab;
-
     void Start()
     {
-        weaponHolder = this.transform;
-        AllWeaponsList = GetAllWeapons();
+        CheckCurrentWeapon();
     }
 
     void Update()
     {
-        WeaponEquippedList = GetAllEquippedWeapons();
+        
+
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, pickupDistance) && Input.GetKeyDown(KeyCode.E))
         {
             PickUp();
         }
 
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            Drop();
-        }
+
     }
 
-    public List<Transform> GetAllEquippedWeapons()
+    private void CheckCurrentWeapon()
     {
-        List<Transform> list = new List<Transform>();
-        foreach (Transform weapon in weaponHolder)
+        if (AllWeapons.Count > 0)
         {
-            list.Add(weapon);
-        }
-        return list;
-    }
-
-    private List<Transform> GetAllWeapons()
-    {
-        List<Transform> list = new List<Transform>();
-        foreach (Transform weapon in AllWeapons)
-        {
-            list.Add(weapon);
-        }
-        return list;
-    }
-
-    private Transform GetWeapon(string name)
-    {
-        foreach (Transform weapon in AllWeaponsList)
-        {
-            Weapon weaponScript = weapon.GetComponent<Weapon>();
-            if(weaponScript != null)
+            foreach (var weapon in AllWeapons)
             {
-                if (weaponScript.Name == name)
-                    return weapon;
+                if (weapon.isCurrentWeapon)
+                {
+                    CurrentWeapon = weapon;
+                }
             }
         }
-        return null;
     }
 
     private void PickUp()
     {
-        if(hit.collider.tag == "PickableWeapon")
+        if (hit.collider.tag == "PickableWeapon" && AllWeaponsInInventory.Count < MaxWeapons)
         {
-            PickupableWeapon pickupableWeapon = hit.transform.GetComponent<PickupableWeapon>();
-            if(pickupableWeapon != null)
+            foreach (var weapon in AllWeapons)
             {
-                if (pickupableWeapon.IsPickedUp == false)
+                if(hit.collider.GetComponent<Weapon>().Name != weapon.Name)
                 {
-                    Destroy(hit.collider.gameObject);
-                    GetWeapon(pickupableWeapon.Name).parent = weaponHolder;
-                    GetAllEquippedWeapons();
+                    foreach (var weaponsAll in AllWeapons)
+                    {
+                        if (weaponsAll.Name == hit.collider.GetComponent<Weapon>().Name)
+                        {
+                            AllWeaponsInInventory.Add(weaponsAll);
+                            Destroy(hit.collider.gameObject);
+                        }
+                        
+                    }
                 }
             }
         }
     }
     private void Drop()
     {
-        var currentWeapon = WeaponManagerScript.CurrentWeapon;
-        currentWeapon.parent = AllWeapons;
-        currentWeapon.gameObject.SetActive(false);
-        Debug.Log("drop");
 
-        if(currentWeapon.GetComponent<Weapon>().Name == "Laser Pistol")
-        {
-            Instantiate(LaserPistolPrefab, transform.position, transform.rotation);
-        }
-        WeaponManagerScript.SelectedWeapon = 0;
-        currentWeapon = null;
     }
+}
+
+[Serializable]
+public class WeaponHolder
+{
+    public string Name;
+    public GameObject Weapon;
+    public Image Icon;
+    public bool isCurrentWeapon;
+    public bool isDropable;
 }
