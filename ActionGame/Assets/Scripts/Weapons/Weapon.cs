@@ -14,7 +14,6 @@ public abstract class Weapon : MonoBehaviour
     public ParticleSystem Muzzle;
     public Camera cam;
     public bool IsShooting;
-    public AudioClip ShotSound;
     [HideInInspector]
     public float nextFire = 0f;
 

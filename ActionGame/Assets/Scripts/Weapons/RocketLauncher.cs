@@ -41,7 +41,7 @@ public class RocketLauncher : Weapon
     {
         TotalAmmo -= 1;
         Muzzle.Play();
-        AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
+        FindObjectOfType<AudioManager>().Play("RocketShoot");
         base.WeaponAnimationScript.ShootAnimation(ShootParam);
 
         Rigidbody clone;

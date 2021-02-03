@@ -7,7 +7,6 @@ public class Missile : MonoBehaviour
 {
     public GameObject[] ExplosionPrefabs;
     public bool isToucing = false;
-    public AudioClip ExplosionSound;
     public float radius = 7;
     public float explosionForce = 800f;
     public float Damage = 100f;
@@ -25,8 +24,8 @@ public class Missile : MonoBehaviour
     private void Explode()
     {
         GameObject randomExplosion = ExplosionPrefabs[Shuffled(ExplosionPrefabs.Length)];
-        AudioSource.PlayClipAtPoint(ExplosionSound, this.gameObject.transform.position);
-        Instantiate(randomExplosion, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        FindObjectOfType<AudioManager>().Play("Explosion");
+        var clone = Instantiate(randomExplosion, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider nearbyObject in colliders)
@@ -37,7 +36,8 @@ public class Missile : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, this.transform.position, radius);
             }
         }   
-        Destroy(this.gameObject);
+        Destroy(clone, 3f);
+        Destroy(gameObject);
     }
 
     private int Shuffled(int count)

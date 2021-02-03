@@ -76,11 +76,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             SpeedEffect.Play();
             SpeedEffect.gameObject.SetActive(true);
+            //FindObjectOfType<AudioManager>().Play("Speed");
         }
         else
         {
             SpeedEffect.gameObject.SetActive(false);
             SpeedEffect.Stop();
+            //FindObjectOfType<AudioManager>().Stop("Speed");
         }
         var main = SpeedEffect.main;
         main.simulationSpeed = PlayerVelocity / 30f;
@@ -90,8 +92,8 @@ public class PlayerMovement : MonoBehaviour {
             SpeedEffect.gameObject.SetActive(false);
             SpeedEffect.Stop();
         }
-            
     }
+
     public bool IsMoving()
     {
         if (x != 0 || y != 0)
@@ -168,6 +170,7 @@ public class PlayerMovement : MonoBehaviour {
         if (grounded && readyToJump) {
             readyToJump = false;
 
+            FindObjectOfType<AudioManager>().Play("Jump");
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             rb.AddForce(normalVector * jumpForce * 0.5f);
 

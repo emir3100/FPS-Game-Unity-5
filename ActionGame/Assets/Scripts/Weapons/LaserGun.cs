@@ -10,7 +10,6 @@ public class LaserGun : Weapon
     public float Damage = 25f;
     private WaitForSeconds laserDuration = new WaitForSeconds(.07f);
     private LineRenderer laserLine;
-    public AudioClip EmptySound;
 
 
     public override void Start()
@@ -31,7 +30,7 @@ public class LaserGun : Weapon
         }
         else if (Input.GetButtonDown("Fire1") && TotalAmmo == 0)
         {
-            AudioSource.PlayClipAtPoint(EmptySound, this.transform.position);
+            FindObjectOfType<AudioManager>().Play("ShotSound");
             IsShooting = false;
         }
         else
@@ -49,7 +48,7 @@ public class LaserGun : Weapon
     {
         TotalAmmo -= 1;
         Muzzle.Play();
-        AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
+        FindObjectOfType<AudioManager>().Play("ShotSound");
         StartCoroutine(ShotEffect());
         base.WeaponAnimationScript.ShootAnimation(ShootParam);
 

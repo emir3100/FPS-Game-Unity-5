@@ -26,7 +26,7 @@ public class JumpGun : Weapon
     public override void Shoot()
     {
         Muzzle.Play();
-        AudioSource.PlayClipAtPoint(ShotSound, this.transform.position);
+        FindObjectOfType<AudioManager>().Play("JumpGun");
         base.WeaponAnimationScript.ShootAnimation(ShootParam);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {

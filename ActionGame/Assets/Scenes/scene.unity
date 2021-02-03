@@ -294,7 +294,7 @@ Transform:
   - {fileID: 662193512}
   - {fileID: 2062884301}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &449120505
 GameObject:
@@ -572,7 +572,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 100, y: -30, z: 0}
 --- !u!1 &493995048
 GameObject:
@@ -870,6 +870,110 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529511915}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &552561310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552561313}
+  - component: {fileID: 552561312}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &552561312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552561310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b473e08fef371498ab3b3bc90d8757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ShotSound
+    clip: {fileID: 8300000, guid: 77d550f78ba742945800cba0b340c69b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EmptySound
+    clip: {fileID: 8300000, guid: 55b22a3e2b5111242948cb379bf83774, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: RocketShoot
+    clip: {fileID: 8300000, guid: 5a4eddf2a21e0fa4b8a64b3211bb512a, type: 3}
+    volume: 0.722
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 5a0ed2e5d9a85af41bf33a63363a84db, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: JumpGun
+    clip: {fileID: 8300000, guid: bb3202918cbd76a47b1b24116e66e247, type: 3}
+    volume: 0.74
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: bb3202918cbd76a47b1b24116e66e247, type: 3}
+    volume: 0.74
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps0
+    clip: {fileID: 8300000, guid: 3cd4afae880b2d24b8f49bc9a1fd9638, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps1
+    clip: {fileID: 8300000, guid: 97a0ac8e02cbe634bb5b7af41dc6cea6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps2
+    clip: {fileID: 8300000, guid: 3fcd3e7c4d9ef414ba28b20c570c38a8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Speed
+    clip: {fileID: 8300000, guid: 62627bb1ec31db74aaa8deb44bc2b55f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &552561313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552561310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6381664, y: -0.44383386, z: 8.091331}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556597297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,7 +1476,7 @@ RectTransform:
   - {fileID: 1859027523}
   - {fileID: 526530883}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1570,6 +1674,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926409116}
   m_CullTransparentMesh: 0
+--- !u!1 &999122616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6337700706107247432, guid: 62b631c54071c6449961103c9b8fd774, type: 3}
+  m_PrefabInstance: {fileID: 6572265777711856746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &999122620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999122616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e6df62f84858640b8c498339bd5046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMovementScript: {fileID: 1113613886}
 --- !u!1 &1039638674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1113613885 stripped
 Transform:
@@ -8016,7 +8138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062884300
 GameObject:
@@ -8431,7 +8553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518368776081546480, guid: 027f0cc8eb760254c98ec18d0bc1de52, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3518368776081546480, guid: 027f0cc8eb760254c98ec18d0bc1de52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8580,7 +8702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6572265776665385559, guid: 62b631c54071c6449961103c9b8fd774, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6572265776665385559, guid: 62b631c54071c6449961103c9b8fd774, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
