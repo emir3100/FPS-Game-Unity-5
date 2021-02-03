@@ -40,7 +40,7 @@ public class PickupableWeapon : MonoBehaviour
             NoPickUpImage.SetActive(false);
             PickUpImage.SetActive(true);
         }
-        CheckIfIsEquipped();
+        //CheckIfIsEquipped();
     }
 
     private void CheckIfIsEquipped()
