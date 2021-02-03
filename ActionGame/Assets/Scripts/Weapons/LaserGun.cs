@@ -11,6 +11,9 @@ public class LaserGun : Weapon
     private WaitForSeconds laserDuration = new WaitForSeconds(.07f);
     private LineRenderer laserLine;
 
+    public AudioClip EmptySound;
+    public Rigidbody Player;
+    public float VelocityReduction;
 
     public override void Start()
     {
@@ -64,13 +67,12 @@ public class LaserGun : Weapon
         }
     }
 
-    
-
     private void DrawLaser()
     {
         if (!IsShooting) return;
-
-        laserLine.SetPosition(0, GunEnd.position);
+        var playerVelocity = Player.velocity;
+        Debug.Log(playerVelocity);
+        laserLine.SetPosition(0, GunEnd.position + playerVelocity * VelocityReduction);
     }
     private IEnumerator ShotEffect()
     {
