@@ -76,13 +76,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             SpeedEffect.Play();
             SpeedEffect.gameObject.SetActive(true);
-            //FindObjectOfType<AudioManager>().Play("Speed");
+            FindObjectOfType<AudioManager>().Play("Speed");
         }
         else
         {
             SpeedEffect.gameObject.SetActive(false);
             SpeedEffect.Stop();
-            //FindObjectOfType<AudioManager>().Stop("Speed");
+            FindObjectOfType<AudioManager>().Stop("Speed");
         }
         var main = SpeedEffect.main;
         main.simulationSpeed = PlayerVelocity / 30f;
