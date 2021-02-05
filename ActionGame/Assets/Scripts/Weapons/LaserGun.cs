@@ -62,8 +62,6 @@ public class LaserGun : Weapon
         }
     }
 
-    
-
     private void DrawLaser()
     {
         if (!IsShooting) return;

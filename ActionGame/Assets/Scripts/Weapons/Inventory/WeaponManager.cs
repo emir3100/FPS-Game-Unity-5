@@ -33,13 +33,22 @@ public class WeaponManager : MonoBehaviour
             SelectNextWeapon();
 
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
             Select(0);
+            ChangeWeapon(CurrentWeapon);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
             Select(1);
+            ChangeWeapon(CurrentWeapon);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            ChangeWeapon(CurrentWeapon);
             Select(2);
+        }
 
         if (Input.GetKeyDown(KeyCode.G))
             DropWeapon();
@@ -319,7 +328,11 @@ public class WeaponManager : MonoBehaviour
             RemoveWeaponFromInventory(weaponScript.Id);
         }
     }
-
+    private void ChangeWeapon(GameObject newWeapon)
+    {
+        PreviousWeapon = CurrentWeapon;
+        CurrentWeapon = newWeapon;
+    }
     private void SelectNextWeapon()
     {
 
@@ -327,10 +340,9 @@ public class WeaponManager : MonoBehaviour
 
     private void SelectPreviousWeapon()
     {
-        GameObject holder;
-        holder = CurrentWeapon;
-        CurrentWeapon = PreviousWeapon;
-        PreviousWeapon = holder;
+        //GameObject holder = CurrentWeapon;
+        //CurrentWeapon
+
     }
 
     private void Select(int type)
