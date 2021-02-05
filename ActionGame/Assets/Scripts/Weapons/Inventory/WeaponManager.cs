@@ -251,6 +251,22 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void SendWeaponValues(Weapon weaponScript, GameObject instantiatedWeapon)
+    {
+        var weaponId = instantiatedWeapon.GetComponent<WeaponID>();
+        if (weaponScript.Id == 0 || weaponScript.Id == 2 || weaponScript.Id == 3)
+        {
+            var laserGun = weaponScript.GetComponent<LaserGun>();
+            weaponId.SetAmmo(laserGun.TotalAmmo);
+        }
+        else if (weaponScript.Id == 4)
+        {
+            var rocketLauncher = weaponScript.GetComponent<RocketLauncher>();
+            weaponId.SetAmmo(rocketLauncher.TotalAmmo);
+
+        }
+    }
+
     private void RemoveWeaponFromInventory(int weaponID)
     {
         foreach (Transform weapon in Slot1.transform)
@@ -290,19 +306,9 @@ public class WeaponManager : MonoBehaviour
             var weapon = weaponDatabaseScript.Weapons[weaponScript.Id];
             var player = GameObject.FindGameObjectsWithTag("Player").First();
             var instantiatedWeapon = Instantiate(weapon.WeaponToPickUpPrefab, player.transform.position, player.transform.rotation);
-            var weaponId = instantiatedWeapon.GetComponent<WeaponID>();
-
-            if (weaponScript.Id == 0 || weaponScript.Id == 2 || weaponScript.Id == 3)
-            {
-                var laserGun = instantiatedWeapon.GetComponent<LaserGun>();
-                //weaponId.Ammo = laserGun.TotalAmmo;
-            }
-            else if (weaponScript.Id == 4)
-            {
-                var rocketLauncher = instantiatedWeapon.GetComponent<RocketLauncher>();
-                //weaponId.Ammo = rocketLauncher.TotalAmmo;
-                
-            }
+            
+            FindObjectOfType<AudioManager>().Play("DropSound");
+            SendWeaponValues(weaponScript, instantiatedWeapon);
             RemoveWeaponFromInventory(weaponScript.Id);
         }
     }

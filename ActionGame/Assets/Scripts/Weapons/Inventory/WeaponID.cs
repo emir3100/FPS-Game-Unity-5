@@ -13,4 +13,9 @@ public class WeaponID : MonoBehaviour
     public float Force;
 
     public int Type; // 0 = Slot1, 1 = Slot2, 2 = Slot3
+
+    public void SetAmmo(int ammo)
+    {
+        Ammo = ammo;
+    }
 }
