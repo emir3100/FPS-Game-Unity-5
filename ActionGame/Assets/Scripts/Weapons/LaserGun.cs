@@ -20,8 +20,6 @@ public class LaserGun : Weapon
 
     public override void Update()
     {
-        TotalAmmoText.text = TotalAmmo.ToString();
-
         if (Input.GetButton("Fire1") && Time.time >= nextFire && TotalAmmo > 0)
         {
             nextFire = Time.time + 1f / FireRate;
@@ -30,7 +28,7 @@ public class LaserGun : Weapon
         }
         else if (Input.GetButtonDown("Fire1") && TotalAmmo == 0)
         {
-            FindObjectOfType<AudioManager>().Play("ShotSound");
+            FindObjectOfType<AudioManager>().Play("EmptySound");
             IsShooting = false;
         }
         else

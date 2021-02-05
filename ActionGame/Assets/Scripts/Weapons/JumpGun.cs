@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class JumpGun : Weapon
@@ -10,7 +11,8 @@ public class JumpGun : Weapon
     public override void Start()
     {
         base.Start();
-        TotalAmmoText.text = "∞";
+        if (PlayerRigidbody == null)
+            PlayerRigidbody = GameObject.FindGameObjectsWithTag("Player").First().GetComponent<Rigidbody>();
     }
 
     public override void Update()

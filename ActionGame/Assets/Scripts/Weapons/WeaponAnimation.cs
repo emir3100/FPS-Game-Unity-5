@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponAnimation : MonoBehaviour
@@ -12,6 +13,8 @@ public class WeaponAnimation : MonoBehaviour
     {
         animator = this.GetComponent<Animator>();
         weaponScript = this.GetComponent<Weapon>();
+        if (PlayerMovementScript == null)
+            PlayerMovementScript = GameObject.FindGameObjectsWithTag("Player").First().GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -20,6 +23,8 @@ public class WeaponAnimation : MonoBehaviour
             MovingAnimation(weaponScript.MovingParam);
         else
             StopMovingAnimation(weaponScript.MovingParam);
+
+        animator.SetFloat("PlayerVelocity", PlayerMovementScript.PlayerVelocity);
     }
 
     public void ShootAnimation(string param)

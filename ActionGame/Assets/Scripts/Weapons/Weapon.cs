@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public int Id;
     public string Name;
     public float FireRate = 15f;
     public float Distance = 100f;
@@ -17,7 +18,6 @@ public abstract class Weapon : MonoBehaviour
     [HideInInspector]
     public float nextFire = 0f;
 
-    public Text TotalAmmoText;
     public RaycastHit hit;
     public WeaponAnimation WeaponAnimationScript;
 

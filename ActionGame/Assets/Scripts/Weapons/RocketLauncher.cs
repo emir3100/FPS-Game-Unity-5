@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RocketLauncher : Weapon
@@ -13,13 +14,13 @@ public class RocketLauncher : Weapon
     public override void Start()
     {
         base.Start();
+        if (Player == null)
+            Player = GameObject.FindGameObjectsWithTag("Player").First().transform;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        TotalAmmoText.text = TotalAmmo.ToString();
-
         if (Input.GetButton("Fire1") && Time.time >= nextFire && TotalAmmo > 0)
         {
             nextFire = Time.time + 1f / FireRate;
