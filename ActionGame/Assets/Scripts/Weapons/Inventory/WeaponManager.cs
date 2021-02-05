@@ -10,9 +10,7 @@ public class WeaponManager : MonoBehaviour
     public GameObject PreviousWeapon;
     private List<GameObject> allWeapons => GetAllWeapons();
     
-    public GameObject Slot1; // type:0 
-    public GameObject Slot2; // type:1
-    public GameObject Slot3; // type:2
+    public GameObject Slot1, Slot2, Slot3;
 
     private bool slot1Full, slot2Full, slot3Full;
 
@@ -297,6 +295,15 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void AddFroceOnDrop(GameObject instantiatedWeapon, float dropForwardForce, float dropUpwardForce)
+    {
+        Rigidbody rigidbody;
+        rigidbody = instantiatedWeapon.GetComponent<Rigidbody>();
+
+        rigidbody.AddForce(Camera.main.transform.forward * dropForwardForce, ForceMode.Impulse);
+        rigidbody.AddForce(Camera.main.transform.up * dropUpwardForce, ForceMode.Impulse);
+    }
+
     private void DropWeapon()
     {
         var id = CurrentWeapon.GetComponent<Weapon>().Id;
@@ -306,7 +313,7 @@ public class WeaponManager : MonoBehaviour
             var weapon = weaponDatabaseScript.Weapons[weaponScript.Id];
             var player = GameObject.FindGameObjectsWithTag("Player").First();
             var instantiatedWeapon = Instantiate(weapon.WeaponToPickUpPrefab, player.transform.position, player.transform.rotation);
-            
+            AddFroceOnDrop(instantiatedWeapon, 15f, 7f);
             FindObjectOfType<AudioManager>().Play("DropSound");
             SendWeaponValues(weaponScript, instantiatedWeapon);
             RemoveWeaponFromInventory(weaponScript.Id);
