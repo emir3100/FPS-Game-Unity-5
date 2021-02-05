@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2614587761536689829}
   - component: {fileID: 3802732947865011667}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: JumpGun_PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

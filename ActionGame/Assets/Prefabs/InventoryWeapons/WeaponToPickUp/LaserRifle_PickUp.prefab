@@ -5615,6 +5615,8 @@ MonoBehaviour:
   WeaponManagerScript: {fileID: 0}
   PickUpRange: 0.73
   IsInTrigger: 0
+  XSprite: {fileID: 0}
+  CheckSprite: {fileID: 0}
 --- !u!135 &108778389862031793
 SphereCollider:
   m_ObjectHideFlags: 0

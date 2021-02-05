@@ -10,6 +10,9 @@ public class PickupWeapon : MonoBehaviour
     private GameObject player;
     public bool IsInTrigger;
     private WeaponID WeaponId;
+    
+
+    
 
     void Start()
     {
@@ -21,6 +24,7 @@ public class PickupWeapon : MonoBehaviour
 
         SphereCollider = this.gameObject.GetComponent<SphereCollider>();
         WeaponId = this.gameObject.GetComponent<WeaponID>();
+        
     }
 
     void Update()

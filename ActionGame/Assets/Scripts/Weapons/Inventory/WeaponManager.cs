@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class WeaponManager : MonoBehaviour
 {
     public GameObject CurrentWeapon;
+    public GameObject PreviousWeapon;
     private List<GameObject> allWeapons => GetAllWeapons();
-    private int totalWeapons => allWeapons.Count;
     
     public GameObject Slot1; // type:0 
     public GameObject Slot2; // type:1
@@ -22,15 +22,17 @@ public class WeaponManager : MonoBehaviour
     {
         weaponDatabaseScript = this.gameObject.GetComponent<WeaponDatabase>();
         AddDefault();
+
+        PreviousWeapon = CurrentWeapon;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            PreviousWeapon();
+            SelectPreviousWeapon();
 
         if (Input.GetKeyDown(KeyCode.E))
-            NextWeapon();
+            SelectNextWeapon();
 
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             Select(0);
@@ -90,7 +92,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
     
-    private bool Exists(int weaponId)
+    public bool Exists(int weaponId)
     {
         foreach (Transform weapon in Slot1.transform)
         {
@@ -99,6 +101,8 @@ public class WeaponManager : MonoBehaviour
 
             if (weapon != null)
                 slot1Full = true;
+            else
+                slot1Full = false;
         }
 
         foreach (Transform weapon in Slot2.transform)
@@ -108,6 +112,8 @@ public class WeaponManager : MonoBehaviour
 
             if (weapon != null)
                 slot2Full = true;
+            else
+                slot2Full = true;
         }
 
         foreach (Transform weapon in Slot3.transform)
@@ -116,6 +122,8 @@ public class WeaponManager : MonoBehaviour
                 return true;
 
             if (weapon != null)
+                slot3Full = true;
+            else
                 slot3Full = true;
         }
         return false;
@@ -159,7 +167,6 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localRotation = Quaternion.Euler(Vector3.zero); // Sets the rotation to 0
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
-            SetWeaponValues(weaponId, instantiatedWeapon);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -237,18 +244,10 @@ public class WeaponManager : MonoBehaviour
             var laserGun = instantiatedWeapon.GetComponent<LaserGun>();
             laserGun.TotalAmmo = weaponId.Ammo;
         }
-        else if (weaponScript.Id == 1) // jumpgun
-        {
-            return;
-        }
         else if (weaponScript.Id == 4)
         {
             var rocketLauncher = instantiatedWeapon.GetComponent<RocketLauncher>();
             rocketLauncher.TotalAmmo = weaponId.Ammo;
-        }
-        else if (weaponScript.Id == 5) // hands
-        {
-            return;
         }
     }
 
@@ -257,19 +256,28 @@ public class WeaponManager : MonoBehaviour
         foreach (Transform weapon in Slot1.transform)
         {
             if (weaponID == weapon.GetComponent<Weapon>().Id)
+            {
                 Destroy(weapon.gameObject);
+                slot1Full = false;
+            }
         }
 
         foreach (Transform weapon in Slot2.transform)
         {
             if (weaponID == weapon.GetComponent<Weapon>().Id)
+            {
                 Destroy(weapon.gameObject);
+                slot2Full = false;
+            }
         }
 
         foreach (Transform weapon in Slot3.transform)
         {
             if (weaponID == weapon.GetComponent<Weapon>().Id)
+            {
                 Destroy(weapon.gameObject);
+                slot3Full = false;
+            }
         }
     }
 
@@ -289,10 +297,6 @@ public class WeaponManager : MonoBehaviour
                 var laserGun = instantiatedWeapon.GetComponent<LaserGun>();
                 //weaponId.Ammo = laserGun.TotalAmmo;
             }
-            else if (weaponScript.Id == 1) // jumpgun
-            {
-                return;
-            }
             else if (weaponScript.Id == 4)
             {
                 var rocketLauncher = instantiatedWeapon.GetComponent<RocketLauncher>();
@@ -303,14 +307,17 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    private void NextWeapon()
+    private void SelectNextWeapon()
     {
 
     }
 
-    private void PreviousWeapon()
+    private void SelectPreviousWeapon()
     {
-
+        GameObject holder;
+        holder = CurrentWeapon;
+        CurrentWeapon = PreviousWeapon;
+        PreviousWeapon = holder;
     }
 
     private void Select(int type)
@@ -361,64 +368,4 @@ public class WeaponManager : MonoBehaviour
                 break;
         }
     }
-
-    
-
-
-
-
-    //public int SelectedWeapon = 0;
-    //public Transform GunHolder;
-    //public Transform UIWeapons;
-
-    //void Start()
-    //{
-    //    SelectWeapon();
-    //}
-
-    //void Update()
-    //{
-    //    int previousSelectedWeapon = SelectedWeapon;
-    //    if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-    //    {
-    //        if (SelectedWeapon >= GunHolder.transform.childCount - 1)
-    //            SelectedWeapon = 0;
-    //        else
-    //            SelectedWeapon++;
-    //    }
-    //    if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-    //    {
-    //        if (SelectedWeapon <= 0)
-    //            SelectedWeapon = GunHolder.transform.childCount - 1;
-    //        else
-    //            SelectedWeapon--;
-    //    }
-    //    if (previousSelectedWeapon != SelectedWeapon)
-    //    {
-    //        SelectWeapon();
-    //    }
-    //}
-    //void SelectWeapon()
-    //{
-    //    //Weapon
-    //    int i = 0;
-    //    foreach (Transform weapon in GunHolder.transform)
-    //    {
-    //        if (i == SelectedWeapon)
-    //            weapon.gameObject.SetActive(true);
-    //        else
-    //            weapon.gameObject.SetActive(false);
-    //        i++;
-    //    }
-    //    //UI Weapon
-    //    int j = 0;
-    //    foreach (Transform weaponUI in UIWeapons.transform)
-    //    {
-    //        if (j == SelectedWeapon)
-    //            weaponUI.gameObject.SetActive(true);
-    //        else
-    //            weaponUI.gameObject.SetActive(false);
-    //        j++;
-    //    }
-    //}
 }

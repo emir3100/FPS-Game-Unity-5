@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 4815716685407804743}
   - component: {fileID: 6513146813700850056}
   m_Layer: 0
-  m_Name: rocket-launcher_mesh
+  m_Name: RocketLauncher_PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
