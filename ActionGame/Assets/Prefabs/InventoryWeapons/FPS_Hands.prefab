@@ -1729,8 +1729,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 5
   Name: Hands
-  FireRate: 5
-  Distance: 10
+  FireRate: 1
+  Distance: 3
   Force: 5
   GunEnd: {fileID: 6840159891670129966}
   Muzzle: {fileID: 8165236601537589554}

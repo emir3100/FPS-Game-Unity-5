@@ -1201,6 +1201,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Punch
+    clip: {fileID: 8300000, guid: 297e37a2d79aef946843f5cf92f7dac0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &552561313
 Transform:
   m_ObjectHideFlags: 0
