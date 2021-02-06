@@ -54,6 +54,38 @@ public class WeaponManager : MonoBehaviour
             DropWeapon();
 
         ShowWeapon();
+        //UpdateWeaponUI();
+    }
+
+    private void UpdateWeaponUI()
+    {
+        List<GameObject> weapons;
+        weapons = GetAllWeapons();
+
+        foreach (var weapon in weapons)
+        {
+            if(weapon != null)
+            {
+               var weaponScript = weapon.GetComponent<Weapon>();
+                if(weaponScript != null)
+                {
+                    //if(Exists(weaponScript.Id))
+                    //{
+                    //    foreach (var weaponData in weaponDatabaseScript.Weapons)
+                    //    {
+                    //        if(weaponScript.Id == weaponData.Id)
+                    //        {
+                    //            GetWeaponUI(weaponScript.Id, weaponData.Type);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+
+                    //}
+                }
+            }
+        }
     }
 
     private GameObject GetSlotType(WeaponData weapon)
