@@ -17,6 +17,8 @@ public class WeaponManager : MonoBehaviour
 
     private WeaponDatabase weaponDatabaseScript;
 
+    public Text AmmoUiText;
+
     private void Start()
     {
         weaponDatabaseScript = this.gameObject.GetComponent<WeaponDatabase>();
@@ -55,7 +57,26 @@ public class WeaponManager : MonoBehaviour
             DropWeapon();
 
         ShowWeapon();
-        //UpdateWeaponUI();
+        SetAmmoText(AmmoUiText);
+    }
+
+    private void SetAmmoText(Text text)
+    {
+        var weaponScript = CurrentWeapon.GetComponent<Weapon>();
+        if (weaponScript.Id == 0 || weaponScript.Id == 2 || weaponScript.Id == 3)
+        {
+            var laserGun = weaponScript.GetComponent<LaserGun>();
+            text.text = laserGun.TotalAmmo.ToString("0000");
+        }
+        else if (weaponScript.Id == 4)
+        {
+            var rocketLauncher = weaponScript.GetComponent<RocketLauncher>();
+            text.text = rocketLauncher.TotalAmmo.ToString("0000");
+        }
+        else if (weaponScript.Id == 1 || weaponScript.Id == 5)
+        {
+            text.text = "∞";
+        }
     }
 
     private void UpdateWeaponUI()
