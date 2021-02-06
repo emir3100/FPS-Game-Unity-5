@@ -11,6 +11,7 @@ public class WeaponManager : MonoBehaviour
     private List<GameObject> allWeapons => GetAllWeapons();
     
     public GameObject Slot1, Slot2, Slot3;
+    public GameObject Slot1UI, Slot2UI, Slot3UI;
 
     private bool slot1Full, slot2Full, slot3Full;
 
@@ -54,6 +55,38 @@ public class WeaponManager : MonoBehaviour
             DropWeapon();
 
         ShowWeapon();
+        //UpdateWeaponUI();
+    }
+
+    private void UpdateWeaponUI()
+    {
+        List<GameObject> weapons;
+        weapons = GetAllWeapons();
+
+        foreach (var weapon in weapons)
+        {
+            if(weapon != null)
+            {
+               var weaponScript = weapon.GetComponent<Weapon>();
+                if(weaponScript != null)
+                {
+                    //if(Exists(weaponScript.Id))
+                    //{
+                    //    foreach (var weaponData in weaponDatabaseScript.Weapons)
+                    //    {
+                    //        if(weaponScript.Id == weaponData.Id)
+                    //        {
+                    //            GetWeaponUI(weaponScript.Id, weaponData.Type);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+
+                    //}
+                }
+            }
+        }
     }
 
     private GameObject GetSlotType(WeaponData weapon)
@@ -73,17 +106,20 @@ public class WeaponManager : MonoBehaviour
         List<GameObject> allWeapons = new List<GameObject>();
         foreach (Transform weapon in Slot1.transform)
         {
-            allWeapons.Add(weapon.gameObject);
+            if (weapon != null)
+                allWeapons.Add(weapon.gameObject);
         }
 
         foreach (Transform weapon in Slot2.transform)
         {
-            allWeapons.Add(weapon.gameObject);
+            if (weapon != null)
+                allWeapons.Add(weapon.gameObject);
         }
 
         foreach (Transform weapon in Slot3.transform)
         {
-            allWeapons.Add(weapon.gameObject);
+            if (weapon != null)
+                allWeapons.Add(weapon.gameObject);
         }
         return allWeapons;
     }
@@ -145,6 +181,7 @@ public class WeaponManager : MonoBehaviour
         instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
         instantiatedWeapon.transform.localPosition = weapon.Position;
         CurrentWeapon = instantiatedWeapon;
+        GetWeaponUI(weapon.Id, weapon.Type);
     }
 
     public void AddWeapon(WeaponID weaponId)
@@ -158,6 +195,7 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
             SetWeaponValues(weaponId, instantiatedWeapon);
+            GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -174,6 +212,7 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localRotation = Quaternion.Euler(Vector3.zero); // Sets the rotation to 0
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
+            GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -191,6 +230,7 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
             SetWeaponValues(weaponId, instantiatedWeapon);
+            GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -208,6 +248,7 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
             SetWeaponValues(weaponId, instantiatedWeapon);
+            GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -225,6 +266,7 @@ public class WeaponManager : MonoBehaviour
             instantiatedWeapon.transform.localScale = Vector3.one; // Sets the scale to 1
             instantiatedWeapon.transform.localPosition = weapon.Position;
             SetWeaponValues(weaponId, instantiatedWeapon);
+            GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
         }
@@ -304,6 +346,66 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void RemoveWeaponUI(int id, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                foreach (Transform item in Slot1UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if (uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+
+            case 1:
+                foreach (Transform item in Slot2UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if (uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+
+            case 2:
+                foreach (Transform item in Slot3UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if (uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     private void AddFroceOnDrop(GameObject instantiatedWeapon, float dropForwardForce, float dropUpwardForce)
     {
         Rigidbody rigidbody;
@@ -315,17 +417,22 @@ public class WeaponManager : MonoBehaviour
 
     private void DropWeapon()
     {
-        var id = CurrentWeapon.GetComponent<Weapon>().Id;
-        if (Exists(id) && id != 5)
+        if(CurrentWeapon != null)
         {
-            var weaponScript = CurrentWeapon.GetComponent<Weapon>();
-            var weapon = weaponDatabaseScript.Weapons[weaponScript.Id];
-            var player = GameObject.FindGameObjectsWithTag("Player").First();
-            var instantiatedWeapon = Instantiate(weapon.WeaponToPickUpPrefab, player.transform.position, player.transform.rotation);
-            AddFroceOnDrop(instantiatedWeapon, 15f, 7f);
-            FindObjectOfType<AudioManager>().Play("DropSound");
-            SendWeaponValues(weaponScript, instantiatedWeapon);
-            RemoveWeaponFromInventory(weaponScript.Id);
+            var id = CurrentWeapon.GetComponent<Weapon>().Id;
+            if (Exists(id) && id != 5)
+            {
+                var weaponScript = CurrentWeapon.GetComponent<Weapon>();
+                var weapon = weaponDatabaseScript.Weapons[weaponScript.Id];
+                var player = GameObject.FindGameObjectsWithTag("Player").First();
+                var instantiatedWeapon = Instantiate(weapon.WeaponToPickUpPrefab, player.transform.position, player.transform.rotation);
+                AddFroceOnDrop(instantiatedWeapon, 15f, 7f);
+                FindObjectOfType<AudioManager>().Play("DropSound");
+                SendWeaponValues(weaponScript, instantiatedWeapon);
+                RemoveWeaponFromInventory(weaponScript.Id);
+                RemoveWeaponUI(weaponScript.Id, weapon.Type);
+                Select(2);
+            }
         }
     }
     private void ChangeWeapon(GameObject newWeapon)
@@ -345,6 +452,88 @@ public class WeaponManager : MonoBehaviour
 
     }
 
+    private void GetWeaponUI(int id, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                foreach (Transform item in Slot1UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+                    
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if(uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = true;
+                        }
+                        else if(!Exists(id))
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                        else
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+
+            case 1:
+                foreach (Transform item in Slot2UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if (uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = true;
+                        }
+                        else if (!Exists(id))
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                        else
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+
+            case 2:
+                foreach (Transform item in Slot3UI.transform)
+                {
+                    if (item == null)
+                        return;
+
+                    var uiId = item.GetComponent<WeaponIDUI>();
+                    if (uiId != null)
+                    {
+                        if (id == uiId.Id)
+                        {
+                            item.GetComponent<Image>().enabled = true;
+                        }
+                        else if (!Exists(id))
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                        else
+                        {
+                            item.GetComponent<Image>().enabled = false;
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     private void Select(int type)
     {
         switch (type)
@@ -357,6 +546,8 @@ public class WeaponManager : MonoBehaviour
                     if(type == 0)
                     {
                         CurrentWeapon = weapon.gameObject;
+                        var id = CurrentWeapon.GetComponent<Weapon>().Id;
+                        GetWeaponUI(id, type);
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -372,6 +563,8 @@ public class WeaponManager : MonoBehaviour
                     if (type == 1)
                     {
                         CurrentWeapon = weapon.gameObject;
+                        var id = CurrentWeapon.GetComponent<Weapon>().Id;
+                        GetWeaponUI(id, type);
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -386,6 +579,8 @@ public class WeaponManager : MonoBehaviour
                     if (type == 2)
                     {
                         CurrentWeapon = weapon.gameObject;
+                        var id = CurrentWeapon.GetComponent<Weapon>().Id;
+                        GetWeaponUI(id, type);
                         return;
                     }
                     weapon.gameObject.SetActive(false);
