@@ -58,6 +58,7 @@ public class WeaponManager : MonoBehaviour
 
         ShowWeapon();
         SetAmmoText(AmmoUiText);
+        SetSlotActive();
     }
 
     private void SetAmmoText(Text text)
@@ -67,46 +68,18 @@ public class WeaponManager : MonoBehaviour
         {
             var laserGun = weaponScript.GetComponent<LaserGun>();
             text.text = laserGun.TotalAmmo.ToString("0000");
+            text.fontSize = 30;
         }
         else if (weaponScript.Id == 4)
         {
             var rocketLauncher = weaponScript.GetComponent<RocketLauncher>();
             text.text = rocketLauncher.TotalAmmo.ToString("0000");
+            text.fontSize = 30;
         }
         else if (weaponScript.Id == 1 || weaponScript.Id == 5)
         {
             text.text = "∞";
-        }
-    }
-
-    private void UpdateWeaponUI()
-    {
-        List<GameObject> weapons;
-        weapons = GetAllWeapons();
-
-        foreach (var weapon in weapons)
-        {
-            if(weapon != null)
-            {
-               var weaponScript = weapon.GetComponent<Weapon>();
-                if(weaponScript != null)
-                {
-                    //if(Exists(weaponScript.Id))
-                    //{
-                    //    foreach (var weaponData in weaponDatabaseScript.Weapons)
-                    //    {
-                    //        if(weaponScript.Id == weaponData.Id)
-                    //        {
-                    //            GetWeaponUI(weaponScript.Id, weaponData.Type);
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-
-                    //}
-                }
-            }
+            text.fontSize = 60;
         }
     }
 
@@ -222,7 +195,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Weapon is already in your inventory");
+            //weapon already exists
         }
 
         if (weaponId.Id == 1 && !Exists(weaponId.Id) && !slot2Full)
@@ -239,7 +212,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Weapon is already in your inventory");
+            //weapon already exists
         }
 
         if (weaponId.Id == 2 && !Exists(weaponId.Id) && !slot1Full)
@@ -257,7 +230,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Weapon is already in your inventory");
+            //weapon already exists
         }
 
         if (weaponId.Id == 3 && !Exists(weaponId.Id) && !slot1Full)
@@ -275,7 +248,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Weapon is already in your inventory");
+            //weapon already exists
         }
 
         if (weaponId.Id == 4 && !Exists(weaponId.Id) && !slot1Full)
@@ -293,17 +266,39 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Weapon is already in your inventory");
+            //weapon already exists
         }
+    }
 
-        if (slot1Full)
-            Debug.Log("Slot 1 is Full");
-
-        if (slot2Full)
-            Debug.Log("Slot 2 is Full");
-
-        if (slot3Full)
-            Debug.Log("Slot 3 is Full");
+    private void SetSlotActive()
+    {
+        var weaponID = CurrentWeapon.GetComponent<Weapon>().Id;
+        var weaponType = weaponDatabaseScript.Weapons.First(x => x.Id == weaponID).Type;
+        switch (weaponType)
+        {
+            case 0:
+                
+                Slot1UI.gameObject.SetActive(true);
+                Slot1UI.transform.localScale = Vector3.zero;
+                LeanTween.scale(Slot1UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                Slot2UI.gameObject.SetActive(false);
+                Slot3UI.gameObject.SetActive(false);
+                break;
+            case 1:
+                Slot1UI.gameObject.SetActive(false);
+                Slot2UI.gameObject.SetActive(true);
+                Slot2UI.transform.localScale = Vector3.zero;
+                LeanTween.scale(Slot2UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                Slot3UI.gameObject.SetActive(false);
+                break;
+            case 2:
+                Slot1UI.gameObject.SetActive(false);
+                Slot2UI.gameObject.SetActive(false);
+                Slot3UI.gameObject.SetActive(true);
+                Slot3UI.transform.localScale = Vector3.zero;
+                LeanTween.scale(Slot3UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                break;
+        }
     }
 
     private void SetWeaponValues(WeaponID weaponId, GameObject instantiatedWeapon)
@@ -456,11 +451,13 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
+
     private void ChangeWeapon(GameObject newWeapon)
     {
         PreviousWeapon = CurrentWeapon;
         CurrentWeapon = newWeapon;
     }
+
     private void SelectNextWeapon()
     {
 
@@ -569,6 +566,7 @@ public class WeaponManager : MonoBehaviour
                         CurrentWeapon = weapon.gameObject;
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
+                        Slot1UI.transform.parent.gameObject.SetActive(true);
                         return;
                     }
                     weapon.gameObject.SetActive(false);

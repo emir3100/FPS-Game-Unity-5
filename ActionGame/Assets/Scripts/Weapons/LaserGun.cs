@@ -53,7 +53,6 @@ public class LaserGun : Weapon
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             laserLine.SetPosition(1, hit.point);
-            Debug.Log(hit.collider.gameObject.name);
         }
         else
         {
