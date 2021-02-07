@@ -18,6 +18,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponDatabase weaponDatabaseScript;
 
     public Text AmmoUiText;
+    public GameObject InventoryUI;
 
     private void Start()
     {
@@ -25,12 +26,14 @@ public class WeaponManager : MonoBehaviour
         AddDefault();
 
         PreviousWeapon = CurrentWeapon;
+        FadeAllUI();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
             SelectPreviousWeapon();
+
 
         if (Input.GetKeyDown(KeyCode.E))
             SelectNextWeapon();
@@ -176,6 +179,7 @@ public class WeaponManager : MonoBehaviour
         instantiatedWeapon.transform.localPosition = weapon.Position;
         CurrentWeapon = instantiatedWeapon;
         GetWeaponUI(weapon.Id, weapon.Type);
+        
     }
 
     public void AddWeapon(WeaponID weaponId)
@@ -280,7 +284,7 @@ public class WeaponManager : MonoBehaviour
                 
                 Slot1UI.gameObject.SetActive(true);
                 Slot1UI.transform.localScale = Vector3.zero;
-                LeanTween.scale(Slot1UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                LeanTween.scale(Slot1UI, Vector3.one, 0.1f).setEaseLinear();
                 Slot2UI.gameObject.SetActive(false);
                 Slot3UI.gameObject.SetActive(false);
                 break;
@@ -288,7 +292,7 @@ public class WeaponManager : MonoBehaviour
                 Slot1UI.gameObject.SetActive(false);
                 Slot2UI.gameObject.SetActive(true);
                 Slot2UI.transform.localScale = Vector3.zero;
-                LeanTween.scale(Slot2UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                LeanTween.scale(Slot2UI, Vector3.one, 0.1f).setEaseLinear();
                 Slot3UI.gameObject.SetActive(false);
                 break;
             case 2:
@@ -296,7 +300,7 @@ public class WeaponManager : MonoBehaviour
                 Slot2UI.gameObject.SetActive(false);
                 Slot3UI.gameObject.SetActive(true);
                 Slot3UI.transform.localScale = Vector3.zero;
-                LeanTween.scale(Slot3UI, Vector3.one, 0.1f).setEaseInOutBounce();
+                LeanTween.scale(Slot3UI, Vector3.one, 0.1f).setEaseLinear();
                 break;
         }
     }
@@ -552,6 +556,80 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void FetchAllImageText(out List<GameObject> allImages, out List<GameObject> allText)
+    {
+        allImages = new List<GameObject>();
+        allText = new List<GameObject>();
+
+        foreach (Transform item in InventoryUI.transform)
+        {
+            if (item?.GetComponent<Image>() is null)
+                continue;
+
+            allImages.Add(item.gameObject);
+            foreach (Transform itemChild in item.transform)
+            {
+                if (itemChild.GetComponent<Text>() != null)
+                    allText.Add(itemChild.gameObject);
+
+                if (itemChild.GetComponent<Image>() is null) 
+                    continue;
+                        
+                allImages.Add(itemChild.gameObject);
+                foreach (Transform itemChildsChild in itemChild.transform)
+                {
+                    if (itemChildsChild.GetComponents<Image>() != null)
+                        allImages.Add(itemChildsChild.gameObject);
+                }
+            }
+        }
+    }
+
+    private IEnumerator FadeUIImage(Image image, float time)
+    {
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1); // alpha is 1
+        yield return new WaitForSeconds(time);
+        
+        for (float i = 1; i >= 0; i -= Time.deltaTime) // fade out
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, i);
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeUIText(Text text, float time)
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+        yield return new WaitForSeconds(time);
+       
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, i);
+            yield return null;
+        }
+        
+    }
+
+    private IEnumerator FadeAll()
+    {
+        FetchAllImageText(out List<GameObject> allImages, out List<GameObject> allText);
+        foreach (var image in allImages)
+        {
+            StartCoroutine(FadeUIImage(image.GetComponent<Image>(), 4f));
+        }
+        foreach (var text in allText)
+        {
+            StartCoroutine(FadeUIText(text.GetComponent<Text>(), 4f));
+        }
+        yield break;
+    }
+
+    void FadeAllUI()
+    {
+        StopAllCoroutines();
+        StartCoroutine("FadeAll");
+    }
+
     private void Select(int type)
     {
         switch (type)
@@ -567,6 +645,7 @@ public class WeaponManager : MonoBehaviour
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
                         Slot1UI.transform.parent.gameObject.SetActive(true);
+                        FadeAllUI();
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -584,6 +663,7 @@ public class WeaponManager : MonoBehaviour
                         CurrentWeapon = weapon.gameObject;
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
+                        FadeAllUI();
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -600,6 +680,7 @@ public class WeaponManager : MonoBehaviour
                         CurrentWeapon = weapon.gameObject;
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
+                        FadeAllUI();
                         return;
                     }
                     weapon.gameObject.SetActive(false);
