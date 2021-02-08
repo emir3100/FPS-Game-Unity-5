@@ -13,12 +13,13 @@ public class WeaponManager : MonoBehaviour
     public GameObject Slot1, Slot2, Slot3;
     public GameObject Slot1UI, Slot2UI, Slot3UI;
 
-    private bool slot1Full, slot2Full, slot3Full;
+    public bool slot1Full, slot2Full, slot3Full;
 
     private WeaponDatabase weaponDatabaseScript;
 
     public Text AmmoUiText;
     public GameObject InventoryUI;
+    public GameObject AmmoUI;
 
     private void Start()
     {
@@ -72,18 +73,69 @@ public class WeaponManager : MonoBehaviour
             var laserGun = weaponScript.GetComponent<LaserGun>();
             text.text = laserGun.TotalAmmo.ToString("0000");
             text.fontSize = 30;
+            SwitchAmmoUI(true);
         }
         else if (weaponScript.Id == 4)
         {
             var rocketLauncher = weaponScript.GetComponent<RocketLauncher>();
             text.text = rocketLauncher.TotalAmmo.ToString("0000");
             text.fontSize = 30;
+            SwitchAmmoUI(true);
         }
-        else if (weaponScript.Id == 1 || weaponScript.Id == 5)
+        else if (weaponScript.Id == 1)
         {
             text.text = "∞";
             text.fontSize = 60;
+            SwitchAmmoUI(true);
         }
+        else if(weaponScript.Id == 5)
+        {
+            SwitchAmmoUI(false);
+        }
+    }
+
+    private void FetchAmmoUI(out List<GameObject> allImages, out List<GameObject> allText)
+    {
+        allImages = new List<GameObject>();
+        allText = new List<GameObject>();
+
+        allImages.Add(AmmoUI);
+
+        foreach (Transform item in AmmoUI.transform)
+        {
+            if (item.GetComponent<Text>() != null)
+                allText.Add(item.gameObject);
+            if (item.GetComponent<Image>() != null)
+                allImages.Add(item.gameObject);
+        }
+    }
+
+    private void SwitchAmmoUI(bool UIOn)
+    {
+        FetchAmmoUI(out List<GameObject> allImages, out List<GameObject> allText);
+        if(UIOn)
+        {
+            foreach (var item in allImages)
+            {
+                item.SetActive(true);
+            }
+            foreach (var item in allText)
+            {
+                item.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (var item in allImages)
+            {
+                item.SetActive(false);
+            }
+            foreach (var item in allText)
+            {
+                item.SetActive(false);
+            }
+        }
+        
     }
 
     private GameObject GetSlotType(WeaponData weapon)
@@ -136,35 +188,35 @@ public class WeaponManager : MonoBehaviour
     {
         foreach (Transform weapon in Slot1.transform)
         {
-            if (weaponId == weapon.GetComponent<Weapon>().Id)
-                return true;
-
             if (weapon != null)
                 slot1Full = true;
             else
                 slot1Full = false;
+
+            if (weaponId == weapon.GetComponent<Weapon>().Id)
+                return true;
         }
 
         foreach (Transform weapon in Slot2.transform)
         {
-            if (weaponId == weapon.GetComponent<Weapon>().Id)
-                return true;
-
             if (weapon != null)
                 slot2Full = true;
             else
                 slot2Full = true;
+
+            if (weaponId == weapon.GetComponent<Weapon>().Id)
+                return true;
         }
 
         foreach (Transform weapon in Slot3.transform)
         {
-            if (weaponId == weapon.GetComponent<Weapon>().Id)
-                return true;
-
             if (weapon != null)
                 slot3Full = true;
             else
                 slot3Full = true;
+
+            if (weaponId == weapon.GetComponent<Weapon>().Id)
+                return true;
         }
         return false;
     }
@@ -196,13 +248,9 @@ public class WeaponManager : MonoBehaviour
             GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
+            return;
         }
-        else
-        {
-            //weapon already exists
-        }
-
-        if (weaponId.Id == 1 && !Exists(weaponId.Id) && !slot2Full)
+        else if (weaponId.Id == 1 && !Exists(weaponId.Id) && !slot2Full)
         {
             var weapon = weaponDatabaseScript.Weapons[weaponId.Id];
             var instantiatedWeapon = Instantiate(weapon.WeaponPrefab);
@@ -213,13 +261,9 @@ public class WeaponManager : MonoBehaviour
             GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
+            return;
         }
-        else
-        {
-            //weapon already exists
-        }
-
-        if (weaponId.Id == 2 && !Exists(weaponId.Id) && !slot1Full)
+        else if (weaponId.Id == 2 && !Exists(weaponId.Id) && !slot1Full)
         {
             var weapon = weaponDatabaseScript.Weapons[weaponId.Id];
             var instantiatedWeapon = Instantiate(weapon.WeaponPrefab);
@@ -231,13 +275,9 @@ public class WeaponManager : MonoBehaviour
             GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
+            return;
         }
-        else
-        {
-            //weapon already exists
-        }
-
-        if (weaponId.Id == 3 && !Exists(weaponId.Id) && !slot1Full)
+        else if (weaponId.Id == 3 && !Exists(weaponId.Id) && !slot1Full)
         {
             var weapon = weaponDatabaseScript.Weapons[weaponId.Id];
             var instantiatedWeapon = Instantiate(weapon.WeaponPrefab);
@@ -249,13 +289,9 @@ public class WeaponManager : MonoBehaviour
             GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
+            return;
         }
-        else
-        {
-            //weapon already exists
-        }
-
-        if (weaponId.Id == 4 && !Exists(weaponId.Id) && !slot1Full)
+        else if (weaponId.Id == 4 && !Exists(weaponId.Id) && !slot1Full)
         {
             var weapon = weaponDatabaseScript.Weapons[weaponId.Id];
             var instantiatedWeapon = Instantiate(weapon.WeaponPrefab);
@@ -267,11 +303,13 @@ public class WeaponManager : MonoBehaviour
             GetWeaponUI(weapon.Id, weapon.Type);
             Destroy(weaponId.gameObject);
             FindObjectOfType<AudioManager>().Play("PickUpSound");
+            return;
         }
         else
         {
-            //weapon already exists
+            FindObjectOfType<AudioManager>().Play("Denied");
         }
+
     }
 
     private void SetSlotActive()
@@ -452,6 +490,11 @@ public class WeaponManager : MonoBehaviour
                 RemoveWeaponFromInventory(weaponScript.Id);
                 RemoveWeaponUI(weaponScript.Id, weapon.Type);
                 Select(2);
+                return;
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().Play("Denied");
             }
         }
     }
@@ -610,24 +653,24 @@ public class WeaponManager : MonoBehaviour
         
     }
 
-    private IEnumerator FadeAll()
+    
+    List<Coroutine> coroutines = new List<Coroutine>();
+    private void FadeAllUI()
     {
+        foreach (var coroutine in coroutines)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutines.Clear();
         FetchAllImageText(out List<GameObject> allImages, out List<GameObject> allText);
         foreach (var image in allImages)
         {
-            StartCoroutine(FadeUIImage(image.GetComponent<Image>(), 4f));
+            coroutines.Add(StartCoroutine(FadeUIImage(image.GetComponent<Image>(), 4f)));
         }
         foreach (var text in allText)
         {
-            StartCoroutine(FadeUIText(text.GetComponent<Text>(), 4f));
+            coroutines.Add(StartCoroutine(FadeUIText(text.GetComponent<Text>(), 4f)));
         }
-        yield break;
-    }
-
-    void FadeAllUI()
-    {
-        StopAllCoroutines();
-        StartCoroutine("FadeAll");
     }
 
     private void Select(int type)
@@ -646,6 +689,7 @@ public class WeaponManager : MonoBehaviour
                         GetWeaponUI(id, type);
                         Slot1UI.transform.parent.gameObject.SetActive(true);
                         FadeAllUI();
+                        FindObjectOfType<AudioManager>().Play("Switch");
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -664,6 +708,7 @@ public class WeaponManager : MonoBehaviour
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
                         FadeAllUI();
+                        FindObjectOfType<AudioManager>().Play("Switch");
                         return;
                     }
                     weapon.gameObject.SetActive(false);
@@ -681,6 +726,7 @@ public class WeaponManager : MonoBehaviour
                         var id = CurrentWeapon.GetComponent<Weapon>().Id;
                         GetWeaponUI(id, type);
                         FadeAllUI();
+                        FindObjectOfType<AudioManager>().Play("Switch");
                         return;
                     }
                     weapon.gameObject.SetActive(false);

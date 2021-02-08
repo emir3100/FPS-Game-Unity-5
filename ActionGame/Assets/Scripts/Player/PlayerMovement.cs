@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -43,6 +46,9 @@ public class PlayerMovement : MonoBehaviour {
     public bool readyToJump = true;
     private float jumpCooldown = 0.25f;
 
+    public float FlyForce = 15f;
+    public bool canFly;
+
     float x, y;
     bool jumping, sprinting, crouching;
 
@@ -51,9 +57,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private float desiredX;
     private bool cancellingGrounded;
+    private Fuel fuelScript;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
+        fuelScript = GetComponent<Fuel>();
     }
     
     void Start() {
@@ -106,6 +114,10 @@ public class PlayerMovement : MonoBehaviour {
         else
             return false;
     }
+
+    private int tapTimes;
+    private bool isHoldingDown;
+    
     private void MyInput() {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
@@ -116,6 +128,37 @@ public class PlayerMovement : MonoBehaviour {
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine("ResetTapTimes");
+            tapTimes +=1;
+            Debug.Log("brahh");
+        }
+        if(tapTimes == 2)
+        {
+            if (isHoldingDown)
+                canFly = true;
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            isHoldingDown = true;
+        }
+        else
+        {
+            isHoldingDown = false;
+        }
+
+        if(canFly && fuelScript.CurrentFuel != 0)
+            JetPackJump();
+        if (!isHoldingDown)
+            canFly = false;
+    }
+
+    IEnumerator ResetTapTimes()
+    {
+        yield return new WaitForSeconds(0.5f);
+        tapTimes = 0;
     }
 
     private void StartCrouch() {
@@ -188,7 +231,13 @@ public class PlayerMovement : MonoBehaviour {
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
-    
+
+    private void JetPackJump()
+    {
+        rb.AddForce(Vector2.up * FlyForce);
+        Debug.Log("shitworks");
+    }
+
     private void ResetJump() {
         readyToJump = true;
     }
