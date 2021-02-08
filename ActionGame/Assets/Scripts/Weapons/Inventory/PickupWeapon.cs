@@ -6,15 +6,17 @@ public class PickupWeapon : MonoBehaviour
 {
     public WeaponManager WeaponManagerScript;
     public float PickUpRange;
-    private SphereCollider SphereCollider;
-    private GameObject player;
+    [HideInInspector]
+    public SphereCollider SphereCollider;
+    [HideInInspector]
+    public GameObject player;
     public bool IsInTrigger;
     private WeaponID WeaponId;
     
 
     
 
-    void Start()
+    public virtual void Start()
     {
         if(player == null)
             player = GameObject.FindWithTag("Player");
@@ -27,7 +29,7 @@ public class PickupWeapon : MonoBehaviour
         
     }
 
-    void Update()
+    public virtual void Update()
     {
         SphereCollider.radius = PickUpRange;
 

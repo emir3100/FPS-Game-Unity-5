@@ -312,6 +312,57 @@ public class WeaponManager : MonoBehaviour
 
     }
 
+    public LaserGun GetLaserGun(int weaponID)
+    {
+        List<GameObject> allWeapons = GetAllWeapons();
+
+        foreach (var weapon in allWeapons)
+        {
+            if(weaponID == weapon.GetComponent<Weapon>().Id)
+            {
+                return weapon.GetComponent<LaserGun>();
+            }
+        }
+        return null;
+    }
+    public RocketLauncher GetRocketLauncher(int weaponID)
+    {
+        List<GameObject> allWeapons = GetAllWeapons();
+
+        foreach (var weapon in allWeapons)
+        {
+            if (weaponID == weapon.GetComponent<Weapon>().Id)
+            {
+                return weapon.GetComponent<RocketLauncher>();
+            }
+        }
+        return null;
+    }
+
+    public void AddAmmo(int weaponID, int amount, GameObject ammoObject)
+    {
+        if (Exists(weaponID))
+        {
+            if(weaponID== 0 || weaponID == 2 || weaponID == 3)
+            {
+                GetLaserGun(weaponID).TotalAmmo += amount;
+                FindObjectOfType<AudioManager>().Play("AmmoPickup");
+                Destroy(ammoObject);
+            }
+
+            if (weaponID == 4)
+            {
+                GetRocketLauncher(weaponID).TotalAmmo += amount;
+                FindObjectOfType<AudioManager>().Play("AmmoPickup");
+                Destroy(ammoObject);
+            }
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().Play("Denied");
+        }
+    }
+
     private void SetSlotActive()
     {
         var weaponID = CurrentWeapon.GetComponent<Weapon>().Id;

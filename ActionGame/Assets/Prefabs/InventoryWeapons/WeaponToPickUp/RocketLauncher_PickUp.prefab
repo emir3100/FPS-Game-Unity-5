@@ -508,6 +508,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponManagerScript: {fileID: 0}
   PickUpRange: 1.1
+  SphereCollider: {fileID: 0}
+  player: {fileID: 0}
   IsInTrigger: 0
 --- !u!135 &4815716685407804743
 SphereCollider:
