@@ -23,7 +23,7 @@ public class Fuel : MonoBehaviour
         Slider.maxValue = MaxFuel;
         Slider.value = CurrentFuel;
 
-        if (playerMovementScript.canFly)
+        if (playerMovementScript.isFlying)
         {
             if(CurrentFuel > 0)
                 CurrentFuel -= Time.deltaTime * ConsumeFuelSpeed;
@@ -36,7 +36,12 @@ public class Fuel : MonoBehaviour
         }
 
         if (CurrentFuel < 0)
+        {
             CurrentFuel = 0;
+            playerMovementScript.isFlying = false;
+            playerMovementScript.JetPackSmoke.Stop();
+        }
+            
 
         if (CurrentFuel > 100f)
             CurrentFuel = 100f;

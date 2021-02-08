@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour {
     private float jumpCooldown = 0.25f;
 
     public float FlyForce = 15f;
-    public bool canFly;
 
     float x, y;
     bool jumping, sprinting, crouching;
@@ -58,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
     private float desiredX;
     private bool cancellingGrounded;
     private Fuel fuelScript;
+    public ParticleSystem JetPackSmoke;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -117,7 +117,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private int tapTimes;
     private bool isHoldingDown;
-    
+    [HideInInspector]
+    public bool isFlying;
+
     private void MyInput() {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
@@ -133,12 +135,11 @@ public class PlayerMovement : MonoBehaviour {
         {
             StartCoroutine("ResetTapTimes");
             tapTimes +=1;
-            Debug.Log("brahh");
         }
         if(tapTimes == 2)
         {
             if (isHoldingDown)
-                canFly = true;
+                isFlying = true;
         }
         if (Input.GetKey(KeyCode.Space))
         {
@@ -149,10 +150,17 @@ public class PlayerMovement : MonoBehaviour {
             isHoldingDown = false;
         }
 
-        if(canFly && fuelScript.CurrentFuel != 0)
+        if(isFlying && fuelScript.CurrentFuel != 0)
+        {
             JetPackJump();
-        if (!isHoldingDown)
-            canFly = false;
+            JetPackSmoke.Play();
+        }
+
+        if (!isHoldingDown) 
+        {
+            isFlying = false;
+            JetPackSmoke.Stop();
+        }
     }
 
     IEnumerator ResetTapTimes()
@@ -235,7 +243,6 @@ public class PlayerMovement : MonoBehaviour {
     private void JetPackJump()
     {
         rb.AddForce(Vector2.up * FlyForce);
-        Debug.Log("shitworks");
     }
 
     private void ResetJump() {
