@@ -33,13 +33,18 @@ public class JumpGun : Weapon
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             Debug.Log(hit.collider.gameObject.name);
-            Vector3 direction = hit.point;
-            AddForce(-direction);
-        }
-    }
+            Vector3 hitPoint = hit.point;
 
-    private void AddForce(Vector3 direction)
-    {
-        PlayerRigidbody.AddForce(direction * Force, ForceMode.Acceleration);
+            Collider[] colliders = Physics.OverlapSphere(hitPoint, 20f);
+            foreach (Collider nearbyObject in colliders)
+            {
+                Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(1500f, hitPoint, 30f);
+                }
+            }
+
+        }
     }
 }
