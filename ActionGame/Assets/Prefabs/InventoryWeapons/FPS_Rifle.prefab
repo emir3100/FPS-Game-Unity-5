@@ -5449,7 +5449,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2265943829808299980}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.238, y: 0, z: -0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5613,12 +5613,13 @@ MonoBehaviour:
   cam: {fileID: 0}
   IsShooting: 0
   nextFire: 0
-  TotalAmmoText: {fileID: 0}
   WeaponAnimationScript: {fileID: 0}
   ShootParam: Shooting
   MovingParam: isMoving
   TotalAmmo: 120
   Damage: 5
+  UpRecoil: 2
+  SideRecoil: 1
 --- !u!120 &2265943829808299954
 LineRenderer:
   m_ObjectHideFlags: 0

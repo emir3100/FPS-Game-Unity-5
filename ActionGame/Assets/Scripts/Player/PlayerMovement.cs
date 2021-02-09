@@ -59,6 +59,10 @@ public class PlayerMovement : MonoBehaviour {
     private Fuel fuelScript;
     public ParticleSystem JetPackSmoke;
 
+    private float UpRecoil;
+    private float SideRecoil;
+    private float recoilSpeed = 20f;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
         fuelScript = GetComponent<Fuel>();
@@ -250,8 +254,12 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     private void Look() {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        float mouseX = SideRecoil + Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        float mouseY =  UpRecoil + Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        UpRecoil -= recoilSpeed * Time.deltaTime;
+        SideRecoil -= recoilSpeed * Time.deltaTime;
+        if (UpRecoil < 0) UpRecoil = 0;
+        if (SideRecoil < 0) SideRecoil = 0;
 
         Vector3 rot = playerCam.transform.localRotation.eulerAngles;
         desiredX = rot.y + mouseX;
@@ -328,6 +336,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private void StopGrounded() {
         grounded = false;
+    }
+
+    public void SetRecoil(float upRecoil, float sideRecoil)
+    {
+        UpRecoil += upRecoil;
+        SideRecoil += sideRecoil;
     }
     
 }

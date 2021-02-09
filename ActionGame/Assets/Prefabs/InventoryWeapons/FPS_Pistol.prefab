@@ -421,7 +421,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900051133669323111}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.22, y: 0, z: -0.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dd14e0ed1a7d64c9e58323d9bad1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
   Name: Laser Pistol
   FireRate: 5
   Distance: 100
@@ -682,12 +683,13 @@ MonoBehaviour:
   cam: {fileID: 0}
   IsShooting: 0
   nextFire: 0
-  TotalAmmoText: {fileID: 0}
   WeaponAnimationScript: {fileID: 53188243654113142}
   ShootParam: Shooting
   MovingParam: isMoving
   TotalAmmo: 120
   Damage: 25
+  UpRecoil: 1
+  SideRecoil: 1
 --- !u!1 &951941395453968725
 GameObject:
   m_ObjectHideFlags: 0

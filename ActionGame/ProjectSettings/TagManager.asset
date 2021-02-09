@@ -8,6 +8,7 @@ TagManager:
   - FlyRamp
   - Weapon
   - WeaponManager
+  - Crosshair
   layers:
   - Default
   - TransparentFX
