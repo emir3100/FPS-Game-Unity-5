@@ -690,6 +690,7 @@ MonoBehaviour:
   Damage: 25
   UpRecoil: 1
   SideRecoil: 1
+  DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
 --- !u!1 &951941395453968725
 GameObject:
   m_ObjectHideFlags: 0

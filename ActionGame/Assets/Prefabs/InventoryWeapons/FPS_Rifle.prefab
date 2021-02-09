@@ -5620,6 +5620,7 @@ MonoBehaviour:
   Damage: 5
   UpRecoil: 2
   SideRecoil: 1
+  DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
 --- !u!120 &2265943829808299954
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -6055,7 +6055,7 @@ GameObject:
   - component: {fileID: 5150829396825486108}
   - component: {fileID: 5150829396825486111}
   - component: {fileID: 5150829396825486096}
-  - component: {fileID: 5150829396825486097}
+  - component: {fileID: -4681179819502333556}
   m_Layer: 0
   m_Name: FPS_Pistol
   m_TagString: Untagged
@@ -6308,7 +6308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3ec9969422a744483cb218142f0e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5150829396825486097
+  PlayerMovementScript: {fileID: 0}
+--- !u!114 &-4681179819502333556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6317,21 +6318,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5456680332765623553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474c32393c6a7db4aab53ec0acab7234, type: 3}
+  m_Script: {fileID: 11500000, guid: 82dd14e0ed1a7d64c9e58323d9bad1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
   Name: Laser Pistol
-  TotalAmmo: 120
-  FireRate: 5
-  Damage: 25
+  FireRate: 10
   Distance: 100
   Force: 100
-  GunEnd: {fileID: 3561192048080659241}
-  Muzzle: {fileID: 2095440969311582423}
+  GunEnd: {fileID: 3328654593353171349, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
+  Muzzle: {fileID: 6053545593211409576, guid: 7fd710e0085ef22449f70bf5e207e862, type: 3}
+  cam: {fileID: 0}
   IsShooting: 0
-  ShotSound: {fileID: 8300000, guid: 77d550f78ba742945800cba0b340c69b, type: 3}
-  EmptySound: {fileID: 8300000, guid: 55b22a3e2b5111242948cb379bf83774, type: 3}
-  TotalAmmoText: {fileID: 0}
+  nextFire: 0
+  WeaponAnimationScript: {fileID: 0}
+  ShootParam: Shooting
+  MovingParam: isMoving
+  TotalAmmo: 120
+  Damage: 5
+  UpRecoil: 0
+  SideRecoil: 0
+  DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
 --- !u!1 &5617023122454903005
 GameObject:
   m_ObjectHideFlags: 0

@@ -6904,6 +6904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dd14e0ed1a7d64c9e58323d9bad1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
   Name: Laser Rifle
   FireRate: 10
   Distance: 100
@@ -6912,15 +6913,15 @@ MonoBehaviour:
   Muzzle: {fileID: 6053545593211409576}
   cam: {fileID: 0}
   IsShooting: 0
-  ShotSound: {fileID: 8300000, guid: 77d550f78ba742945800cba0b340c69b, type: 3}
   nextFire: 0
-  TotalAmmoText: {fileID: 0}
   WeaponAnimationScript: {fileID: 0}
   ShootParam: Shooting
   MovingParam: isMoving
   TotalAmmo: 120
   Damage: 5
-  EmptySound: {fileID: 8300000, guid: 55b22a3e2b5111242948cb379bf83774, type: 3}
+  UpRecoil: 0
+  SideRecoil: 0
+  DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
 --- !u!1 &6277093880396917117
 GameObject:
   m_ObjectHideFlags: 0

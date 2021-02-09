@@ -28,6 +28,7 @@ public class WeaponManager : MonoBehaviour
 
         PreviousWeapon = CurrentWeapon;
         FadeAllUI();
+
     }
 
     private void Update()

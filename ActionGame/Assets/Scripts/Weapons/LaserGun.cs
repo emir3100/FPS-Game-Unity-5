@@ -17,6 +17,7 @@ public class LaserGun : Weapon
     public float SideRecoil;
     private float originalSideRecoil;
     private float originalUpRecoil;
+    public GameObject DefaultImpact;
 
     public override void Start()
     {
@@ -72,11 +73,48 @@ public class LaserGun : Weapon
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Distance))
         {
             laserLine.SetPosition(1, hit.point);
+            Hit();
         }
         else
         {
             Vector3 endPoint = cam.transform.position + (cam.transform.forward.normalized * Distance);
             laserLine.SetPosition(1, endPoint);
+        }
+    }
+
+    private void Hit()
+    {
+        if (hit.collider.tag == "Enemy")
+        {
+            //AI ai = hit.transform.GetComponent<Ai>();
+            //if (ai != null)
+            //{
+            //    ai.TakeDamage(Damage);
+            //    Debug.Log("Body is hit");
+            //    GameObject BI = Instantiate(BloodImpact, hit.point, Quaternion.LookRotation(hit.normal));
+            //    Destroy(BI, 2f);
+            //    GameObject BS = Instantiate(BloodSplatter, hit.point, Quaternion.LookRotation(hit.normal * -1f));
+            //    Destroy(BS, 10f);
+            //}
+        }
+        else if (hit.collider.tag == "Head")
+        {
+            //Ai ai = hit.transform.GetComponentInParent<Ai>();
+            //ai.HeadShot();
+            //Debug.Log("HeadShot");
+            //GameObject HSI = Instantiate(HeadShotImpact, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(HSI, 2f);
+        }
+        else if (hit.collider.tag == "Untagged" || hit.collider.tag == "FlyRamp" || hit.collider.tag == "RunnableWall")
+        {
+            GameObject defaultImpact = Instantiate(DefaultImpact, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(defaultImpact, 10f);
+        }
+        else if (hit.collider.tag == "MoveableObject")
+        {
+            //hit.rigidbody.AddForce(-hit.normal * ForceImpact);
+            //GameObject DI = Instantiate(DefaultImpact, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(DI, 10f);
         }
     }
 
