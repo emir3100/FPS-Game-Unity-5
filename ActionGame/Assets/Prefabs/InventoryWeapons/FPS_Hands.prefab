@@ -1740,6 +1740,9 @@ MonoBehaviour:
   WeaponAnimationScript: {fileID: 3175189504974346970}
   ShootParam: Punch
   MovingParam: isMoving
+  Damage: 25
+  AlienImpact: {fileID: 7675156571534207004, guid: 7aa4fc97bdc6ee341a1ad753d2ec662e, type: 3}
+  AlienImpactHeadShot: {fileID: 168944, guid: ecf2d6723e2fcfa42b92fd2c93484a64, type: 3}
 --- !u!95 &-4854459949709446147
 Animator:
   serializedVersion: 3

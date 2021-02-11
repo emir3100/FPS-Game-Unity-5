@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hands : Weapon
 {
+    public float Damage = 25f;
+    public GameObject AlienImpact;
+    public GameObject AlienImpactHeadShot;
     public override void Start()
     {
         base.Start();
@@ -28,6 +32,34 @@ public class Hands : Weapon
         {
             Debug.Log(hit.collider.gameObject.name);
             Vector3 direction = hit.point;
+            Hit();
+        }
+    }
+
+    private void Hit()
+    {
+        if (hit.collider.tag == "Alien")
+        {
+            EnemyAI ai = hit.transform.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.TakeDamage(Damage);
+                Debug.Log("Body is hit");
+                GameObject BloodImpact = Instantiate(AlienImpact, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(BloodImpact, 2f);
+            }
+        }
+        else if (hit.collider.tag == "AlienHead")
+        {
+            EnemyAI ai = hit.transform.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.TakeDamage(100f);
+                ai.HeadShot();
+                Debug.Log("HeadShot");
+                GameObject BloodImpact = Instantiate(AlienImpactHeadShot, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(BloodImpact, 2f);
+            }
         }
     }
 }

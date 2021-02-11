@@ -35,6 +35,12 @@ public class Missile : MonoBehaviour
             {
                 rb.AddExplosionForce(explosionForce, this.transform.position, radius);
             }
+
+            EnemyAI ai = nearbyObject.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.TakeDamage(Damage);
+            }
         }   
         Destroy(clone, 3f);
         Destroy(gameObject);
