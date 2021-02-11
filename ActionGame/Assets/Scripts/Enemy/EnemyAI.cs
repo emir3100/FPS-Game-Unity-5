@@ -6,12 +6,10 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform AnimatedVersion;
-    public Transform RagdollVersion;
-    public Transform CenterMass;
+    public Transform RagdollVersionPrefab;
     private Animator animator;
     private Rigidbody rigidbody;
-
+    private Transform ragdollClone;
     
 
     public float Health = 100f;
@@ -32,8 +30,8 @@ public class EnemyAI : MonoBehaviour
     public bool PlayerAlive;
 
     [Header("Effects")]
-    public Transform HeadRagdoll;
-    public Transform NeckRagdoll;
+    private Transform headRagdoll;
+    private Transform neckRagdoll;
     public GameObject HeadShotEffect;
 
     [Header("Weapon")]
@@ -45,10 +43,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-        AnimatedVersion.gameObject.SetActive(true);
-        RagdollVersion.gameObject.SetActive(false);
-        //Head.GetComponent<Collider>().enabled = true;
-        animator = AnimatedVersion.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         enemyWeaponScript = GetComponent<EnemyWeapon>();
         agent.SetDestination(CurrentWayPoint.transform.position);
@@ -77,6 +72,8 @@ public class EnemyAI : MonoBehaviour
             case AiState.Dead:
                 break;
         }
+        if (Health <= 0)
+            State = AiState.Dead;
 
         if (playerHealthScript.Health <= 0)
             PlayerAlive = false;
@@ -218,23 +215,23 @@ public class EnemyAI : MonoBehaviour
     private void Dead()
     {
         Health = 0;
-        GetComponent<NavMeshAgent>().enabled = false;
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Rigidbody>().useGravity = false;
-        AnimatedVersion.gameObject.SetActive(false);
-        RagdollVersion.gameObject.SetActive(true);
+        var ragdoll = Instantiate(RagdollVersionPrefab, transform.position, transform.rotation);
+        ragdollClone = ragdoll;
         var weapon = Instantiate(DropWeapon, transform.position, transform.rotation);
         var ammo = Instantiate(DropAmmo, transform.position, transform.rotation);
         AddFroceOnDrop(weapon, 7f, 5f);
         AddFroceOnDrop(ammo, 7f, 5f);
         State = AiState.Dead;
         FindObjectOfType<AudioManager>().Play("Die");
+        Destroy(this.gameObject);
     }
 
     public void HeadShot()
     {
-        HeadRagdoll.transform.localScale = new Vector3(0f, 0f, 0f);
-        GameObject bloodhs = Instantiate(HeadShotEffect, NeckRagdoll.position, Quaternion.Euler(new Vector3(-90, 0, 0)), NeckRagdoll) as GameObject;
+        headRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").Find("Head").transform;
+        neckRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").transform;
+        headRagdoll.transform.localScale = new Vector3(0f, 0f, 0f);
+        GameObject bloodhs = Instantiate(HeadShotEffect, neckRagdoll.position, Quaternion.Euler(new Vector3(-90, 0, 0)), neckRagdoll) as GameObject;
         Destroy(bloodhs, 10f);
         FindObjectOfType<AudioManager>().Play("Headshot");
         State = AiState.Dead;

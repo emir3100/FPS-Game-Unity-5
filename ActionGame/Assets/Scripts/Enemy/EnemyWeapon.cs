@@ -10,7 +10,6 @@ public class EnemyWeapon : Weapon
     public float Accuracy;
     private float change;
     public GameObject DefaultImpact;
-    public Transform AnimatedVersion;
 
     private WaitForSeconds laserDuration = new WaitForSeconds(.07f);
     private LineRenderer laserLine;
@@ -31,15 +30,13 @@ public class EnemyWeapon : Weapon
 
     public override void Shoot()
     {
-        
-        
-
+        var rigbone = transform.Find("Armature").Find("mixamorig1:Hips").transform;
         Muzzle.Play();
         FindObjectOfType<AudioManager>().Play("ShotSound");
         StartCoroutine(ShotEffect());
-        Physics.Raycast(transform.position, target, out hit, Distance);
+        Physics.Raycast(new Vector3(rigbone.position.x-3f, rigbone.position.y+3f, rigbone.position.z+3f), target, out hit, Distance);
         laserLine.SetPosition(0, GunEnd.position);
-        laserLine.SetPosition(1, hit.point);
+        laserLine.SetPosition(1, target);
 
         Hit();
     }

@@ -25,10 +25,10 @@ public class Crosshair : MonoBehaviour
     {
         originalSize = Size;
         crosshairTransform = GetComponent<RectTransform>();
-        top = transform.FindChild("Top").GetComponent<RectTransform>();
-        bottom = transform.FindChild("Bottom").GetComponent<RectTransform>();
-        left = transform.FindChild("Left").GetComponent<RectTransform>();
-        right = transform.FindChild("Right").GetComponent<RectTransform>();
+        top = transform.Find("Top").GetComponent<RectTransform>();
+        bottom = transform.Find("Bottom").GetComponent<RectTransform>();
+        left = transform.Find("Left").GetComponent<RectTransform>();
+        right = transform.Find("Right").GetComponent<RectTransform>();
     }
 
     private void Update()
