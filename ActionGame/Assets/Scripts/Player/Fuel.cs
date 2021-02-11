@@ -27,7 +27,6 @@ public class Fuel : MonoBehaviour
         {
             if(CurrentFuel > 0)
                 CurrentFuel -= Time.deltaTime * ConsumeFuelSpeed;
-            
         }
         else
         {

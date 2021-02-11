@@ -8,7 +8,7 @@ public class EnemyWeapon : Weapon
     public float Damage = 25f;
     [Range(0f,1f)]
     public float Accuracy;
-    private float change;
+    public float change;
     public GameObject DefaultImpact;
 
     private WaitForSeconds laserDuration = new WaitForSeconds(.07f);
@@ -24,8 +24,8 @@ public class EnemyWeapon : Weapon
 
     public override void Update()
     {
-        change = Random.Range(Accuracy - 1f, Accuracy + 1f);
-        target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        //change = Random.Range(Accuracy - 1f, Accuracy + 1f);
+        target = new Vector3(player.transform.position.x, player.transform.position.y-0.23f, player.transform.position.z);
     }
 
     public override void Shoot()
@@ -34,7 +34,7 @@ public class EnemyWeapon : Weapon
         Muzzle.Play();
         FindObjectOfType<AudioManager>().Play("ShotSound");
         StartCoroutine(ShotEffect());
-        Physics.Raycast(new Vector3(rigbone.position.x-3f, rigbone.position.y+3f, rigbone.position.z+3f), target, out hit, Distance);
+        Physics.Raycast(new Vector3(rigbone.transform.position.x, rigbone.transform.position.y-1f, rigbone.position.z-2f), target, out hit, Distance);
         laserLine.SetPosition(0, GunEnd.position);
         laserLine.SetPosition(1, target);
 
@@ -58,19 +58,23 @@ public class EnemyWeapon : Weapon
 
     private void Hit()
     {
-        if (hit.collider.tag == "Player")
+        Collider[] colliders = Physics.OverlapSphere(hit.point, 20f);
+        foreach (Collider nearbyObject in colliders)
         {
-            PlayerHealth player = hit.transform.GetComponent<PlayerHealth>();
-            if (player != null)
+            if (nearbyObject.gameObject.tag == "Player")
             {
-                player.TakeDamage(Damage);
+                player.GetComponent<PlayerHealth>().TakeDamage(Damage);
             }
         }
-        else
-        {
-            GameObject defaultImpact = Instantiate(DefaultImpact, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(defaultImpact, 10f);
-        }
+        //if (hit.collider.tag == "Player")
+        //{
+            
+        //}
+        ////else
+        ////{
+        ////    GameObject defaultImpact = Instantiate(DefaultImpact, hit.point, Quaternion.LookRotation(hit.normal));
+        ////    Destroy(defaultImpact, 10f);
+        ////}
     }
 
     private IEnumerator ShotEffect()
