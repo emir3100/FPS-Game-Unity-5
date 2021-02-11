@@ -18,6 +18,8 @@ public class LaserGun : Weapon
     private float originalSideRecoil;
     private float originalUpRecoil;
     public GameObject DefaultImpact;
+    public GameObject AlienImpact;
+    public GameObject AlienImpactHeadShot;
 
     public override void Start()
     {
@@ -84,26 +86,28 @@ public class LaserGun : Weapon
 
     private void Hit()
     {
-        if (hit.collider.tag == "Enemy")
+        if (hit.collider.tag == "Alien")
         {
-            //AI ai = hit.transform.GetComponent<Ai>();
-            //if (ai != null)
-            //{
-            //    ai.TakeDamage(Damage);
-            //    Debug.Log("Body is hit");
-            //    GameObject BI = Instantiate(BloodImpact, hit.point, Quaternion.LookRotation(hit.normal));
-            //    Destroy(BI, 2f);
-            //    GameObject BS = Instantiate(BloodSplatter, hit.point, Quaternion.LookRotation(hit.normal * -1f));
-            //    Destroy(BS, 10f);
-            //}
+            EnemyAI ai = hit.transform.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.TakeDamage(Damage);
+                Debug.Log("Body is hit");
+                GameObject BloodImpact = Instantiate(AlienImpact, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(BloodImpact, 2f);
+            }
         }
-        else if (hit.collider.tag == "Head")
+        else if (hit.collider.tag == "AlienHead")
         {
-            //Ai ai = hit.transform.GetComponentInParent<Ai>();
-            //ai.HeadShot();
-            //Debug.Log("HeadShot");
-            //GameObject HSI = Instantiate(HeadShotImpact, hit.point, Quaternion.LookRotation(hit.normal));
-            //Destroy(HSI, 2f);
+            EnemyAI ai = hit.transform.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.TakeDamage(100f);
+                ai.HeadShot();
+                Debug.Log("HeadShot");
+                GameObject BloodImpact = Instantiate(AlienImpactHeadShot, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(BloodImpact, 2f);
+            }
         }
         else if (hit.collider.tag == "Untagged" || hit.collider.tag == "FlyRamp" || hit.collider.tag == "RunnableWall")
         {

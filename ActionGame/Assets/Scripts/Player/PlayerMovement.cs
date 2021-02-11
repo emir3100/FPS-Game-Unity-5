@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool readyToJump = true;
     private float jumpCooldown = 0.25f;
 
-    public float FlyForce = 15f;
+    public float FlyForce = 20f;
 
     float x, y;
     bool jumping, sprinting, crouching;

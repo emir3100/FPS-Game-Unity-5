@@ -10028,6 +10028,8 @@ MonoBehaviour:
   UpRecoil: 1.5
   SideRecoil: 1
   DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
+  AlienImpact: {fileID: 7675156571534207004, guid: 7aa4fc97bdc6ee341a1ad753d2ec662e, type: 3}
+  AlienImpactHeadShot: {fileID: 163734, guid: 0a5ac034133a7654a8565697adff5548, type: 3}
 --- !u!120 &944037835383484852
 LineRenderer:
   m_ObjectHideFlags: 0

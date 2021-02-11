@@ -6376,7 +6376,7 @@ MonoBehaviour:
   Damage: 3
   UpRecoil: 0
   SideRecoil: 0
-  DefaultImpact: {fileID: 8786916981139640838, guid: 60baee0c17595b34a896805fb5b312f9, type: 3}
+  DefaultImpact: {fileID: 100004, guid: aa55aee569f7eda4eb623f672f393b96, type: 3}
 --- !u!120 &5494108322859262535
 LineRenderer:
   m_ObjectHideFlags: 0

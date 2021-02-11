@@ -9,6 +9,8 @@ TagManager:
   - Weapon
   - WeaponManager
   - Crosshair
+  - Alien
+  - AlienHead
   layers:
   - Default
   - TransparentFX
