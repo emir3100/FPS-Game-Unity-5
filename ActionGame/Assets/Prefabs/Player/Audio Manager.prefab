@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3172245020789636192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3172245020789636191}
+  - component: {fileID: 3172245020789636190}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3172245020789636191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172245020789636192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6381664, y: -0.44383386, z: 8.091331}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3172245020789636190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172245020789636192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b473e08fef371498ab3b3bc90d8757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ShotSound
+    clip: {fileID: 8300000, guid: 77d550f78ba742945800cba0b340c69b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EmptySound
+    clip: {fileID: 8300000, guid: 55b22a3e2b5111242948cb379bf83774, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: RocketShoot
+    clip: {fileID: 8300000, guid: 5a4eddf2a21e0fa4b8a64b3211bb512a, type: 3}
+    volume: 0.722
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 5a0ed2e5d9a85af41bf33a63363a84db, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: JumpGun
+    clip: {fileID: 8300000, guid: bb3202918cbd76a47b1b24116e66e247, type: 3}
+    volume: 0.74
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: a14c860003c24cb4580d794eeb986083, type: 3}
+    volume: 0.221
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps0
+    clip: {fileID: 8300000, guid: 3cd4afae880b2d24b8f49bc9a1fd9638, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps1
+    clip: {fileID: 8300000, guid: 97a0ac8e02cbe634bb5b7af41dc6cea6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Footsteps2
+    clip: {fileID: 8300000, guid: 3fcd3e7c4d9ef414ba28b20c570c38a8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Speed
+    clip: {fileID: 8300000, guid: 62627bb1ec31db74aaa8deb44bc2b55f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: PickUpSound
+    clip: {fileID: 8300000, guid: 732334647cf10fe458ece83312621404, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DropSound
+    clip: {fileID: 8300000, guid: e11319aa34a75764b9a2b5a3baa55ee7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Punch
+    clip: {fileID: 8300000, guid: 297e37a2d79aef946843f5cf92f7dac0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Switch
+    clip: {fileID: 8300000, guid: 267666e653a95b54a9f0a0fb2a2f5426, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Denied
+    clip: {fileID: 8300000, guid: 6e271b22aa3d099469ed054e30db512c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: AmmoPickup
+    clip: {fileID: 8300000, guid: 3a24e7289f415bf4aa91de0338af3bad, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DamageAlien
+    clip: {fileID: 8300000, guid: aa64d42c08b3a8d43bd07cbfb7de3558, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Headshot
+    clip: {fileID: 8300000, guid: 10f57f6759f573b469de225c2c96580d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: ed54d2150c7ee7b4eafb68e2f85651c7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: a337332b222baac419cdf983da4ddd36, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 259b5422f521815488878d113a6d60be, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

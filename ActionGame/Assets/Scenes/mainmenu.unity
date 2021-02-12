@@ -2172,28 +2172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ef3ce40887a5c4292e9d15ecf74bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _light: {fileID: 0}
-  _material: {fileID: 0}
-  SampleCount: 47
-  ScatteringCoef: 0.918
-  ExtinctionCoef: 0.0539
-  SkyboxExtinctionCoef: 0.846
-  MieG: 0.524
-  HeightFog: 0
-  HeightScale: 0.496
-  GroundLevel: 21.22
-  Noise: 0
-  NoiseScale: 43
-  NoiseIntensity: 5.22
-  NoiseIntensityOffset: 0.6
-  NoiseVelocity: {x: 3, y: 3}
-  MaxRayLength: 400
-  _frustumCorners:
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  _reversedZ: 0
 --- !u!1 &495594709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,7 +3578,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1050104053}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8732,7 +8710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 10d4433844accbf40b51c3829d11d700, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 7776c1bb4ac9ddd46a65c3dd52abc76b, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
