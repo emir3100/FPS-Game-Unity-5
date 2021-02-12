@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 563ed01aa98d8a941983847a7376a418
+timeCreated: 1532911270
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Structure_03
+    100004: Structure_03_DecalNormal
+    100006: Structure_03_DecalNormal.001
+    100008: Structure_03.001
+    100010: Structure_03_glass
+    100012: Structure_03_Decal_Color
+    100014: Structure_03_Decal_Normal
+    100016: Structure_03_emission
+    100018: Structure_03_Decal_Normal.002
+    100020: Structure_03_Collider
+    100022: Structure_03_Decal_Text
+    400000: //RootNode
+    400002: Structure_03
+    400004: Structure_03_DecalNormal
+    400006: Structure_03_DecalNormal.001
+    400008: Structure_03.001
+    400010: Structure_03_glass
+    400012: Structure_03_Decal_Color
+    400014: Structure_03_Decal_Normal
+    400016: Structure_03_emission
+    400018: Structure_03_Decal_Normal.002
+    400020: Structure_03_Collider
+    400022: Structure_03_Decal_Text
+    2100000: decals
+    2100002: Color_2
+    2100004: Color_1
+    2100006: Detail_Planes
+    2100008: shiny_glass
+    2100010: decal_color
+    2100012: Emission
+    2100014: Decal_Text
+    2100016: No Name
+    2300000: Structure_03
+    2300002: Structure_03_DecalNormal
+    2300004: Structure_03_DecalNormal.001
+    2300006: Structure_03.001
+    2300008: Structure_03_glass
+    2300010: Structure_03_Decal_Color
+    2300012: Structure_03_Decal_Normal
+    2300014: Structure_03_emission
+    2300016: Structure_03_Decal_Normal.002
+    2300018: Structure_03_Collider
+    2300020: Structure_03_Decal_Text
+    3300000: Structure_03
+    3300002: Structure_03_DecalNormal
+    3300004: Structure_03_DecalNormal.001
+    3300006: Structure_03.001
+    3300008: Structure_03_glass
+    3300010: Structure_03_Decal_Color
+    3300012: Structure_03_Decal_Normal
+    3300014: Structure_03_emission
+    3300016: Structure_03_Decal_Normal.002
+    3300018: Structure_03_Collider
+    3300020: Structure_03_Decal_Text
+    4300000: Structure_03_DecalNormal
+    4300002: Structure_03
+    4300004: Structure_03_DecalNormal.001
+    4300006: Structure_03.001
+    4300008: Structure_03_glass
+    4300010: Structure_03_Decal_Color
+    4300012: Structure_03_Decal_Normal
+    4300014: Structure_03_emission
+    4300016: Structure_03_Decal_Normal.002
+    4300018: Structure_03_Collider
+    4300020: Structure_03_Decal_Text
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
