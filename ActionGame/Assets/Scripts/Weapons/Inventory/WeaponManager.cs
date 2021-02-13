@@ -232,7 +232,6 @@ public class WeaponManager : MonoBehaviour
         instantiatedWeapon.transform.localPosition = weapon.Position;
         CurrentWeapon = instantiatedWeapon;
         GetWeaponUI(weapon.Id, weapon.Type);
-        
     }
 
     public void AddWeapon(WeaponID weaponId)
