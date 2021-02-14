@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     private float effect;
     public Image deathImage;
     public float speed = 5f;
+    public GameObject CanvasMoving;
 
     private void Start()
     {
@@ -50,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
         deathImage.color = new Color(deathImage.color.r, deathImage.color.g, deathImage.color.b, 255f);
         deathImage.GetComponentInChildren<Text>().enabled = true;
         FindObjectOfType<AudioManager>().Play("Death");
+        CanvasMoving.SetActive(false);
         Destroy(this.gameObject);
     }
 
