@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Objective : MonoBehaviour
 {
+    public int Id;
     public Image Img;
     public Transform Target;
     public Text Meter;
@@ -16,22 +17,42 @@ public class Objective : MonoBehaviour
     private PlayerHealth playerHealthScript;
     public bool IsTrigger;
     public bool IsActive;
-
+    private Objective currentObjective => FindCurrentObjective();
+    private ObjectiveManager objectiveManager;
 
     private void Start()
     {
+        objectiveManager = GameObject.FindGameObjectsWithTag("Player").First().GetComponent<ObjectiveManager>();
         playerHealthScript = GameObject.FindGameObjectsWithTag("Player").First().GetComponent<PlayerHealth>();
+        
+        
+    }
+
+    private Objective FindCurrentObjective()
+    {
+        var ObjectiveContainer = this.gameObject;
+        foreach (var objective in objectiveManager.ObjectivesActive)
+        {
+            if (Id == objective.Id)
+                return objective;
+        }
+        return null;
     }
 
     private void Update()
     {
         if(Target == null)
         {
-            this.gameObject.GetComponent<Objective>().enabled = false;
+            currentObjective.enabled = false;
         }
 
-
-        
+        if (IsTrigger)
+        {
+            if (Vector3.Distance(Target.position, transform.position) < 4f)
+            {
+                currentObjective.enabled = false;
+            }
+        }
 
         float minX = Img.GetPixelAdjustedRect().width / 2;
         float maxX = Screen.width - minX;
@@ -66,15 +87,5 @@ public class Objective : MonoBehaviour
         }
         else
             ObjectiveWarning.enabled = false;
-
-        if (IsTrigger)
-        {
-            if(Vector3.Distance(Target.position, transform.position) < 4f)
-            {
-                Img.gameObject.SetActive(false);
-                this.gameObject.GetComponent<Objective>().enabled = false;
-            }
-        }
-
     }
 }

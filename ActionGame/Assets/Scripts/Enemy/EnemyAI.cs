@@ -50,6 +50,8 @@ public class EnemyAI : MonoBehaviour
         playerHealthScript = Player.GetComponent<PlayerHealth>();
         rigidbody = GetComponent<Rigidbody>();
         PlayerAlive = true;
+        headRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").Find("Head").transform;
+        neckRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").transform;
     }
 
     private void Update()
@@ -228,8 +230,6 @@ public class EnemyAI : MonoBehaviour
 
     public void HeadShot()
     {
-        headRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").Find("Head").transform;
-        neckRagdoll = ragdollClone.Find("Armature").Find("mixamorig1:Hips").Find("mixamorig1:Spine").Find("mixamorig1:Spine1").Find("mixamorig1:Spine2").Find("Neck").transform;
         headRagdoll.transform.localScale = new Vector3(0f, 0f, 0f);
         GameObject bloodhs = Instantiate(HeadShotEffect, neckRagdoll.position, Quaternion.Euler(new Vector3(-90, 0, 0)), neckRagdoll) as GameObject;
         Destroy(bloodhs, 10f);

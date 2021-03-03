@@ -8,6 +8,7 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject ObjectiveContainer;
     public List<Objective> ObjectivesActive;
     public List<Objective> ObjectivesNonActive;
+    public GameObject MovingCanvas;
     void Start()
     {
         FetchObjectives(ObjectiveContainer);
